@@ -1,0 +1,6 @@
+.git
+node_modules
+output
+docs
+test
+.env*

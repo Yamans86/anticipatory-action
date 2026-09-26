@@ -1,0 +1,63 @@
+[
+  {
+    "id":"AA-SRC-CA-001","version":"1.0.0","type":"source","country":"CA","title":"Labour Force Survey","status":"catalogued","updated":"2026-09-26",
+    "summary":"Statistics Canada's monthly survey provides employment and unemployment context for the Canada pilot.",
+    "body":"Candidate source for measuring labour-market outcomes. The publisher describes a monthly survey used to calculate employment and unemployment rates. This record documents the source, not a downloaded dataset or a finding about AI.",
+    "limitations":["No data have been ingested or analysed by this project.","This source alone cannot attribute labour-market changes to AI.","Coverage, sampling uncertainty, revisions and subgroup availability must be reviewed before analysis."],
+    "provenance":{"origin":"Statistics Canada","url":"https://www.statcan.gc.ca/en/survey/household/3701","accessed":"2026-09-26","license":"Not assessed; review the terms of the selected release before ingestion.","artifact":null,"sha256":null,"codeCommit":null},
+    "links":[],"details":{"Review":"Publisher description checked; suitability and licensing review pending."}
+  },
+  {
+    "id":"AA-DAT-CA-001","version":"0.1.0","type":"dataset","country":"CA","title":"Canada labour-market series","status":"planned","updated":"2026-09-26",
+    "summary":"A proposed versioned extract of labour-market outcomes for the Canada pilot.",
+    "body":"Select the precise public tables, population definitions, observation period and release vintages before ingestion. Store a manifest containing publisher URLs, retrieval time, licence, checksums and transformation commit. Retain the original release alongside derived outputs where licensing permits.",
+    "limitations":["No dataset exists in this release.","Frequency, subgroup coverage, revisions policy and accessible history are not yet confirmed."],
+    "provenance":{"origin":"Project proposal based on the candidate source","url":null,"accessed":null,"license":"Pending source selection","artifact":null,"sha256":null,"codeCommit":null},
+    "links":[{"id":"AA-SRC-CA-001","version":"1.0.0","relation":"planned input"}],
+    "details":{"Unit of analysis":"To be specified before ingestion","Missing values":"Preserve as missing; never convert absent observations to zero","Release vintage":"To be captured for each extract"}
+  },
+  {
+    "id":"AA-HYP-CA-001","version":"0.1.0","type":"hypothesis","country":"CA","title":"Earlier signs of labour-market stress","status":"proposed","updated":"2026-09-26",
+    "summary":"Test whether candidate indicators add useful warning time beyond ordinary labour-market baselines.",
+    "body":"The research question is whether changes associated with AI adoption can help identify labour-market stress early enough to support economically vulnerable people. Association is not causation. A separate, credible measure of AI adoption or exposure is needed before evaluating the AI-specific hypothesis.",
+    "limitations":["AI exposure data and a defensible identification strategy have not been selected.","A positive forecasting result would not by itself demonstrate that AI caused harm."],
+    "provenance":{"origin":"Project brief; initial research proposal","url":null,"accessed":null,"license":"Project-authored record; reuse terms not yet assigned","artifact":null,"sha256":null,"codeCommit":null},
+    "links":[],"details":{"Falsification":"No improvement over the pre-specified baseline, or gains that disappear in held-out periods, would count against the forecasting hypothesis."}
+  },
+  {
+    "id":"AA-IND-CA-001","version":"0.1.0","type":"indicator","country":"CA","title":"Change in unemployment rate","status":"proposed","updated":"2026-09-26",
+    "summary":"A candidate measure of labour-market stress, defined in percentage points.",
+    "body":"Proposed calculation: the unemployment rate in month t minus the rate in month t minus 12, using a consistent population, geography and adjustment basis. Record the rate definition and source vintage. This candidate is an outcome measure; its value as an early signal remains untested.",
+    "limitations":["No values have been calculated.","Annual comparisons can mask recent turning points.","Seasonality, sampling error, composition effects and revisions may affect interpretation."],
+    "provenance":{"origin":"Project-authored candidate definition","url":null,"accessed":null,"license":"Project-authored record; reuse terms not yet assigned","artifact":null,"sha256":null,"codeCommit":null},
+    "links":[{"id":"AA-DAT-CA-001","version":"0.1.0","relation":"planned input"}],
+    "details":{"Formula":"rate(t) - rate(t-12)","Units":"Percentage points","Missingness":"Return missing if either observation is missing","Threshold":"Not set; must be calibrated and independently reviewed"}
+  },
+  {
+    "id":"AA-EXP-CA-001","version":"0.1.0","type":"experiment","country":"CA","title":"Baseline and warning-time backtest","status":"planned","updated":"2026-09-26",
+    "summary":"A proposed test of predictive usefulness with strict separation of training and evaluation periods.",
+    "body":"Pre-register the stress-event definition, forecast horizon and candidate predictors. Compare a simple historical baseline against candidate models using rolling time splits and only information available at each forecast date. Report warning time, false alarms, missed events, calibration and subgroup performance. Publish null and failed results with the same provenance as positive findings.",
+    "limitations":["No experiment has been run and no performance metrics exist.","Predictors, target event, evaluation periods and minimum sample size remain to be specified.","Historical success may not transfer to future structural change."],
+    "provenance":{"origin":"Project-authored draft protocol","url":null,"accessed":null,"license":"Project-authored record; reuse terms not yet assigned","artifact":null,"sha256":null,"codeCommit":null},
+    "links":[{"id":"AA-HYP-CA-001","version":"0.1.0","relation":"tests"},{"id":"AA-IND-CA-001","version":"0.1.0","relation":"candidate measure"}],
+    "details":{"Execution":"Not run","Results":"None","Reproduction requirements":"Pinned data manifests, code commit, environment, parameters, seed and run log"}
+  },
+  {
+    "id":"AA-MOD-CA-001","version":"0.1.0","type":"model","country":"CA","title":"Canada early-warning model","status":"concept","updated":"2026-09-26",
+    "summary":"A model specification under development, with no operational warning output.",
+    "body":"A future model would translate validated evidence into an interpretable estimate of labour-market stress. It must document intended use, exclusions, input freshness, uncertainty, calibration and failure modes. A human review process must decide whether any signal merits action.",
+    "limitations":["No model is trained or validated.","No alert levels, numerical thresholds or live signals are active.","Insufficient evidence is an unknown state, never an assurance of low risk."],
+    "provenance":{"origin":"Project-authored model concept","url":null,"accessed":null,"license":"Project-authored record; reuse terms not yet assigned","artifact":null,"sha256":null,"codeCommit":null},
+    "links":[{"id":"AA-EXP-CA-001","version":"0.1.0","relation":"requires validation from"}],
+    "details":{"Operational state":"Inactive","Activation gate":"Independent validation, agreed thresholds, accountable owner and action capacity","Abstention":"Missing, stale or unsuitable inputs must suppress warnings"}
+  },
+  {
+    "id":"AA-ACT-CA-001","version":"0.1.0","type":"action","country":"CA","title":"Review readiness for earlier support","status":"proposed","updated":"2026-09-26",
+    "summary":"A proposed decision pathway connecting reviewed signals to feasible support options.",
+    "body":"If a future validated signal passes human review, the responsible institution would assess affected groups, consult communities and determine whether existing support can be made available earlier. Potential options require a separate feasibility and equity assessment. This record does not authorize spending, eligibility decisions or intervention.",
+    "limitations":["No implementing institution, budget or operational mandate is confirmed.","Effectiveness, distributional impacts and feasibility remain untested.","No individual-level targeting or automated decisions are supported."],
+    "provenance":{"origin":"Project-authored action proposal","url":null,"accessed":null,"license":"Project-authored record; reuse terms not yet assigned","artifact":null,"sha256":null,"codeCommit":null},
+    "links":[{"id":"AA-MOD-CA-001","version":"0.1.0","relation":"conditional on validated evidence from"}],
+    "details":{"Trigger":"None approved","Accountable owner":"Not assigned","Lead time":"To be assessed","Safeguards":"Human review, community consultation, appeal and monitoring","Stop rule":"Suspend if evidence quality deteriorates or harms emerge"}
+  }
+]
