@@ -1,5 +1,6 @@
 import {records,countries,findRecord,validateCatalog,recordPath} from './catalog.js';
 import {layout,home,catalog,detail,countryPage,staticPages} from './pages.js';
+import {css} from './style.js';
 
 validateCatalog();
 
@@ -13,6 +14,7 @@ export function handleRequest(req,res){
   try {url=new URL(req.url,'http://localhost');} catch {return send(400,'Bad request','text/plain');}
   const path=url.pathname;
   if(path==='/health')return send(200,JSON.stringify({status:'ok',version:'0.3.2',records:records.length}),'application/json');
+  if(path==='/style.css')return send(200,css,'text/css; charset=utf-8');
   if(path==='/favicon.ico')return send(204,'');
   if(path==='/api/catalog.json')return send(200,JSON.stringify({schemaVersion:'1.0.0',release:'0.3.2',countries,records},null,2),'application/json');
   const api=path.match(/^\/api\/objects\/(AA-[A-Z]{3}-[A-Z]{2}-\d{3})\/v\/(\d+\.\d+\.\d+)\.json$/);
