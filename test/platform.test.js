@@ -12,7 +12,7 @@ test('catalog rejects duplicate identities and dangling evidence references',()=
   assert.throws(()=>validateCatalog(broken),/Broken evidence link/);
 });
 test('filters combine country, type and text',()=>{
-  assert.equal(filterRecords({q:'unemployment',type:'indicator',country:'CA'}).length,1);
+  assert.equal(filterRecords({q:'unemployment',type:'indicator',country:'CA'}).length,2);
   assert.equal(filterRecords({q:'nonexistent'}).length,0);
   assert.equal(filterRecords({country:'XX'}).length,0);
 });
@@ -34,7 +34,7 @@ test('search escapes HTML and provides an honest empty state',async()=>{
   const html=await(await fetch(`${base}/evidence?q=${encodeURIComponent('<script>alert(1)</script>')}`)).text();
   assert.ok(!html.includes('<script>'));assert.match(html,/No records match/);
   const search=await(await fetch(`${base}/catalog?type=indicator&country=CA&q=unemployment`)).text();
-  assert.match(search,/1 record</);assert.match(search,/Change in unemployment rate/);
+  assert.match(search,/2 records</);assert.match(search,/Change in unemployment rate/);assert.match(search,/Recent-immigrant unemployment momentum/);
 });
 test('health, read-only methods and security headers',async()=>{
   const health=await fetch(base+'/health');assert.equal((await health.json()).status,'ok');
