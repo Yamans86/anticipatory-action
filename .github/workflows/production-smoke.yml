@@ -12,17 +12,21 @@ jobs:
   smoke:
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for Vercel production and verify public routes
+      - name: Wait for GitHub Pages and verify public routes
         shell: bash
         run: |
           set -u
-          BASE="https://anticipatory-action.vercel.app"
+          BASE="https://yamans86.github.io/anticipatory-action"
           ok=0
           for attempt in {1..24}; do
             home="$(curl -fsS --max-time 15 "$BASE/" 2>/dev/null || true)"
-            health="$(curl -fsS --max-time 15 "$BASE/health" 2>/dev/null || true)"
+            health="$(curl -fsS --max-time 15 "$BASE/health.json" 2>/dev/null || true)"
             canada="$(curl -fsS --max-time 15 "$BASE/countries/CA" 2>/dev/null || true)"
-            if grep -q "Understand change" <<<"$home"               && grep -q '"status"[[:space:]]*:[[:space:]]*"ok"' <<<"$health"               && grep -q "Canada Lab" <<<"$canada"; then
+            evidence="$(curl -fsS --max-time 15 "$BASE/evidence" 2>/dev/null || true)"
+            if grep -q "Understand change" <<<"$home" \
+              && grep -q '"status"[[:space:]]*:[[:space:]]*"ok"' <<<"$health" \
+              && grep -q "Canada Lab" <<<"$canada" \
+              && grep -q "Evidence and data" <<<"$evidence"; then
               echo "Production smoke test passed on attempt $attempt"
               ok=1
               break
@@ -36,8 +40,10 @@ jobs:
             echo "--- HOME HEADERS/BODY ---"
             curl -i --max-time 20 "$BASE/" || true
             echo "--- HEALTH HEADERS/BODY ---"
-            curl -i --max-time 20 "$BASE/health" || true
+            curl -i --max-time 20 "$BASE/health.json" || true
             echo "--- CANADA HEADERS/BODY ---"
             curl -i --max-time 20 "$BASE/countries/CA" || true
+            echo "--- EVIDENCE HEADERS/BODY ---"
+            curl -i --max-time 20 "$BASE/evidence" || true
             exit 1
           fi
