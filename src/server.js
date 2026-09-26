@@ -3,9 +3,11 @@ import {readFileSync} from 'node:fs';
 import {pathToFileURL} from 'node:url';
 import {records,countries,findRecord,validateCatalog,recordPath} from './catalog.js';
 import {layout,home,catalog,detail,countryPage,staticPages} from './pages.js';
+
 validateCatalog();
 const css=readFileSync(new URL('../public/style.css',import.meta.url));
-export const server=http.createServer((req,res)=>{
+
+export function handleRequest(req,res){
   res.setHeader('X-Content-Type-Options','nosniff');
   res.setHeader('Content-Security-Policy',"default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'");
   res.setHeader('Referrer-Policy','strict-origin-when-cross-origin');
@@ -14,10 +16,10 @@ export const server=http.createServer((req,res)=>{
   let url;
   try {url=new URL(req.url,'http://localhost');} catch {return send(400,'Bad request','text/plain');}
   const path=url.pathname;
-  if(path==='/health')return send(200,JSON.stringify({status:'ok',version:'0.3.0',records:records.length}),'application/json');
+  if(path==='/health')return send(200,JSON.stringify({status:'ok',version:'0.3.1',records:records.length}),'application/json');
   if(path==='/style.css')return send(200,css,'text/css; charset=utf-8');
   if(path==='/favicon.ico')return send(204,'');
-  if(path==='/api/catalog.json')return send(200,JSON.stringify({schemaVersion:'1.0.0',release:'0.3.0',countries,records},null,2),'application/json');
+  if(path==='/api/catalog.json')return send(200,JSON.stringify({schemaVersion:'1.0.0',release:'0.3.1',countries,records},null,2),'application/json');
   const api=path.match(/^\/api\/objects\/(AA-[A-Z]{3}-[A-Z]{2}-\d{3})\/v\/(\d+\.\d+\.\d+)\.json$/);
   if(api){const r=findRecord(api[1],api[2]);return send(r?200:404,JSON.stringify(r||{error:'Record version not found'}),'application/json');}
   const obj=path.match(/^\/objects\/(AA-[A-Z]{3}-[A-Z]{2}-\d{3})(?:\/v\/(\d+\.\d+\.\d+))?$/);
@@ -29,5 +31,10 @@ export const server=http.createServer((req,res)=>{
   if(c)return send(200,layout(`${c.name} Lab`,countryPage(c),path));
   if(staticPages[path])return send(200,layout(staticPages[path][0],staticPages[path][1](),path));
   return send(404,layout('Page not found','<div class="intro"><h1>Page not found</h1><p>This page or record version does not exist.</p><a href="/catalog">Browse the research catalog</a></div>',path));
-});
-if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)server.listen(Number(process.env.PORT)||3000,'0.0.0.0',()=>console.log('Anticipatory Action listening'));
+}
+
+export const server=http.createServer(handleRequest);
+
+if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
+  server.listen(Number(process.env.PORT)||3000,'0.0.0.0',()=>console.log('Anticipatory Action listening'));
+}
