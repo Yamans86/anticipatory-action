@@ -1,0 +1,25 @@
+{
+  "datasetId": "AA-DAT-CA-002",
+  "datasetVersion": "TO_BE_ASSIGNED_WHEN_INGESTED",
+  "publisher": "Statistics Canada",
+  "sourceProduct": "Table 14-10-0471-01",
+  "sourceUrl": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410047101",
+  "retrievedAt": null,
+  "releaseDate": null,
+  "referenceCoverage": {
+    "start": null,
+    "end": null
+  },
+  "licence": "Statistics Canada Open Licence",
+  "sourceSha256": null,
+  "rawArtifact": null,
+  "processedArtifact": null,
+  "processedSha256": null,
+  "transformationCommit": null,
+  "grain": "month x immigrant-status group x selected demographic strata",
+  "missingnessPolicy": "Preserve missing and suppressed values; never coerce to zero.",
+  "qualityNotes": [],
+  "parameters": {},
+  "status": "template-only"
+}
+
