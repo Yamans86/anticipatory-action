@@ -1,0 +1,43 @@
+name: Verify production URL
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Vercel production and verify public routes
+        shell: bash
+        run: |
+          set -u
+          BASE="https://anticipatory-action.vercel.app"
+          ok=0
+          for attempt in {1..24}; do
+            home="$(curl -fsS --max-time 15 "$BASE/" 2>/dev/null || true)"
+            health="$(curl -fsS --max-time 15 "$BASE/health" 2>/dev/null || true)"
+            canada="$(curl -fsS --max-time 15 "$BASE/countries/CA" 2>/dev/null || true)"
+            if grep -q "Understand change" <<<"$home"               && grep -q '"status"[[:space:]]*:[[:space:]]*"ok"' <<<"$health"               && grep -q "Canada Lab" <<<"$canada"; then
+              echo "Production smoke test passed on attempt $attempt"
+              ok=1
+              break
+            fi
+            echo "Attempt $attempt did not pass yet"
+            sleep 5
+          done
+
+          if [[ "$ok" -ne 1 ]]; then
+            echo "Production smoke test failed"
+            echo "--- HOME HEADERS/BODY ---"
+            curl -i --max-time 20 "$BASE/" || true
+            echo "--- HEALTH HEADERS/BODY ---"
+            curl -i --max-time 20 "$BASE/health" || true
+            echo "--- CANADA HEADERS/BODY ---"
+            curl -i --max-time 20 "$BASE/countries/CA" || true
+            exit 1
+          fi
