@@ -11,6 +11,12 @@ const out = new URL('../' + outputArg.replace(/^\.\//,'').replace(/\/$/,'') + '/
 rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 
+const basePath = (process.env.BASE_PATH || '').replace(/\/$/, '');
+function applyBasePath(html) {
+  if (!basePath) return html;
+  return html.replace(/(href|src|action)="\/(?!\/)/g, `$1="${basePath}/`);
+}
+
 function outputPath(route, extension = '.html') {
   if (route === '/') return new URL('index.html', out);
   const clean = route.replace(/^\//, '').replace(/\/$/, '');
@@ -20,7 +26,7 @@ function outputPath(route, extension = '.html') {
 function writeRoute(route, title, body) {
   const file = outputPath(route);
   mkdirSync(dirname(file.pathname), { recursive: true });
-  writeFileSync(file, layout(title, body, route));
+  writeFileSync(file, applyBasePath(layout(title, body, route)));
 }
 
 writeRoute('/', 'Home', home());
@@ -70,6 +76,6 @@ writeFileSync(new URL('health.json', out), JSON.stringify({ status: 'ok', versio
 copyFileSync(new URL('../public/style.css', import.meta.url), new URL('style.css', out));
 
 const notFound = layout('Page not found', '<div class="intro"><h1>Page not found</h1><p>This page or record version does not exist.</p><a href="/catalog">Browse the research catalog</a></div>', '/404');
-writeFileSync(new URL('404.html', out), notFound);
+writeFileSync(new URL('404.html', out), applyBasePath(notFound));
 
 console.log(`Built static site with ${records.length} versioned research records.`);
