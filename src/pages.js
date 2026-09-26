@@ -1,5 +1,5 @@
 import {latest, records, countries, types, countryName, recordPath, filterRecords} from './catalog.js';
-import {glossaryTerms, annotateAcronyms} from './glossary.js';
+import {glossaryTerms, annotateAcronyms, termsInText} from './glossary.js';
 export const esc = value => String(value ?? '').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const repo = 'https://github.com/Yamans86/anticipatory-action';
 const nav = [['/','Home'],['/why','Why this matters'],['/evidence','Evidence'],['/countries/CA','Canada Lab'],['/experiments','Tests'],['/early-warning','Early Warning'],['/actions','Actions'],['/glossary','Glossary'],['/project','Project']];
@@ -16,7 +16,7 @@ export function home() {
 }
 function table(items) {
   if (!items.length) return '<p class="empty" role="status">No records match these filters. Try a broader search or reset the filters.</p>';
-  return `<div class="table-scroll"><table><caption class="sr-only">Research records</caption><thead><tr><th scope="col">Record</th><th scope="col">Type</th><th scope="col">Country</th><th scope="col">Status</th></tr></thead><tbody>${items.map(r=>`<tr><td><a href="${recordPath(r)}">${esc(r.title)}</a><small>${r.id} · v${r.version}</small></td><td class="capitalize">${r.type}</td><td>${countryName(r.country)}</td><td class="capitalize">${r.status}</td></tr>`).join('')}</tbody></table></div>`;
+  return `<div class="table-scroll"><table><caption class="sr-only">Research records</caption><thead><tr><th scope="col">Record</th><th scope="col">Type</th><th scope="col">Country</th><th scope="col">Status</th></tr></thead><tbody>${items.map(r=>{const titleTerms=termsInText(r.title);return `<tr><td><a href="${recordPath(r)}">${esc(r.title)}</a><small>${r.id} · v${r.version}</small>${titleTerms.length?`<small class="title-expansion">${titleTerms.map(x=>`${esc(x.full)} (${esc(x.abbr)})`).join(' · ')}</small>`:''}</td><td class="capitalize">${r.type}</td><td>${countryName(r.country)}</td><td class="capitalize">${r.status}</td></tr>`}).join('')}</tbody></table></div>`;
 }
 export function catalog(url, allowed = types, title='Research catalog', desc='Follow each research object and its evidence chain.') {
   const q=url.searchParams.get('q')||'', type=url.searchParams.get('type')||'', country=url.searchParams.get('country')||'';
@@ -26,8 +26,7 @@ export function catalog(url, allowed = types, title='Research catalog', desc='Fo
 export function detail(r) {
   const dependents=records.filter(x=>x.links.some(l=>l.id===r.id&&l.version===r.version));
   const links=rs=>rs.length?`<ul>${rs.map(x=>`<li><a href="${recordPath(x)}">${esc(x.title)}</a> <small>v${x.version}</small></li>`).join('')}</ul>`:'<p>None recorded in this release.</p>';
-  const recordText=JSON.stringify(r);
-  const termsUsed=glossaryTerms.filter(x=>recordText.includes(x.abbr));
+  const termsUsed=termsInText(JSON.stringify(r));
   const terminology=termsUsed.length?`<dl>${termsUsed.map(x=>`<dt>${esc(x.full)} (${esc(x.abbr)})</dt><dd>${esc(x.meaning)}</dd>`).join('')}</dl><p><a href="/glossary">Open the full glossary</a></p>`:'<p>No specialist abbreviations are used in this record.</p>';
   return `<p class="breadcrumb"><a href="/catalog">Research catalog</a> / ${esc(r.type)}</p>${intro(r.title,r.summary)}<div class="detail-layout"><article class="prose"><h2>Purpose</h2><p>${esc(r.body)}</p><h2>Limitations</h2><ul>${r.limitations.map(l=>`<li>${esc(l)}</li>`).join('')}</ul><h2>Specification</h2><dl>${Object.entries(r.details).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl><h2>Evidence and dependencies</h2>${r.links.length?`<ul>${r.links.map(l=>`<li>${esc(l.relation)}: <a href="/objects/${l.id}/v/${l.version}">${l.id} · v${l.version}</a></li>`).join('')}</ul>`:'<p>No upstream research objects recorded.</p>'}<h2>Used by</h2>${links(dependents)}<h2>Terms used on this page</h2>${terminology}<h2>Provenance</h2><dl>${Object.entries(r.provenance).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${k==='url'&&v?`<a href="${esc(v)}">Publisher source</a>`:esc(v??'Not available — no executed data or code artifact')}</dd>`).join('')}</dl></article><aside aria-label="Record metadata"><dl><dt>Permanent ID</dt><dd><code>${r.id}</code></dd><dt>Version</dt><dd>${r.version}</dd><dt>Status</dt><dd class="capitalize">${r.status}</dd><dt>Country</dt><dd>${countryName(r.country)}</dd><dt>Updated</dt><dd>${r.updated}</dd></dl><p><a href="${recordPath(r)}">Version permalink</a></p><p><a href="/api/objects/${r.id}/v/${r.version}.json">Download record JSON</a></p><p><a href="${repo}/commits/main/content/records.json">Editorial history</a></p><h3>Available versions</h3>${links(records.filter(x=>x.id===r.id))}</aside></div>`;
 }
