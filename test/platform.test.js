@@ -30,7 +30,12 @@ test('core renderers produce HTML without a runtime server',()=>{
   assert.match(catalog(new URL('https://static.local/catalog?type=indicator&country=CA&q=unemployment'),undefined,'Research catalog','test'),/2 records</);
   assert.ok(staticPages['/project']);
   assert.ok(staticPages['/canada-poc']);
-  assert.match(staticPages['/canada-poc'][1](),/SHARE WITH CAVEATS/);
+  assert.ok(staticPages['/glossary']);
+  assert.match(staticPages['/canada-poc'][1](),/Occupational Transition Pressure Model/);
+  assert.match(staticPages['/canada-poc'][1](),/Transition Velocity and Protected Transition Margin Model/);
+  assert.match(staticPages['/glossary'][1](),/Population Exposure Model/);
+  assert.match(homeHtml,/abbr class="term" title="Artificial intelligence"/);
+  assert.match(layout(records.find(r=>r.id==='AA-MOD-CA-002').title,detail(records.find(r=>r.id==='AA-MOD-CA-002')),recordPath(records.find(r=>r.id==='AA-MOD-CA-002'))),/Terms used on this page/);
 });
 
 test('search rendering escapes HTML and keeps honest empty states',()=>{
