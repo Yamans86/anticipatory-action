@@ -22,10 +22,15 @@ test('core renderers produce HTML without a runtime server',()=>{
   assert.match(homeHtml, /<h1>Understand change/);
   assert.match(homeHtml, /What this project is/);
   assert.match(homeHtml, /Canada is the first pilot/);
-  assert.match(layout('Canada Lab',countryPage({code:'CA',name:'Canada',stage:'Evidence build',description:'test'}),'/countries/CA'),/Canada Lab/);
+  const canadaHtml = layout('Canada Lab',countryPage({code:'CA',name:'Canada',stage:'Validated POC - calibration pending',description:'test'}),'/countries/CA');
+  assert.match(canadaHtml,/Canada Lab/);
+  assert.match(canadaHtml,/Computational POC and validation/);
+  assert.match(canadaHtml,/NOT triggered|not triggered/i);
   assert.match(layout(records[0].title,detail(records[0]),recordPath(records[0])),/Evidence and dependencies/);
   assert.match(catalog(new URL('https://static.local/catalog?type=indicator&country=CA&q=unemployment'),undefined,'Research catalog','test'),/2 records</);
   assert.ok(staticPages['/project']);
+  assert.ok(staticPages['/canada-poc']);
+  assert.match(staticPages['/canada-poc'][1](),/SHARE WITH CAVEATS/);
 });
 
 test('search rendering escapes HTML and keeps honest empty states',()=>{
