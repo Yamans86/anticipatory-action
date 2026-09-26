@@ -1,21 +1,29 @@
 # Deployment status
 
+Production site: https://anticipatory-action.vercel.app/
+
 GitHub repository: https://github.com/Yamans86/anticipatory-action
 
-Railway workspace inspected: Yaman's Projects (`d3a583d2-9e81-4810-add2-e9c6805ec862`). Its existing Telegram_Micro_learning project was left unchanged.
+## Current deployment path
 
-Creating a dedicated Anticipatory Action project was rejected by Railway:
+Vercel is the active production host. The project is connected to the `main` branch of `Yamans86/anticipatory-action`, so approved changes merged to `main` are intended to trigger production deployments automatically.
 
-> Usage limit exceeded. Please increase or remove the hard limit to resume resource provisioning
+The current release is a small read-only Node service with no database, persistent volume or environment secrets. The application exposes `/health` for readiness and keeps all public research records in Git-backed JSON.
 
-No project, service, domain or deployment was created. The workspace owner must resolve the usage limit in Railway; this task does not change billing limits.
+## Verification
 
-After that is resolved:
+Before treating a release as production-ready:
 
-1. Create a dedicated Anticipatory Action project in the inspected workspace.
-2. Create a GitHub-backed service from `Yamans86/anticipatory-action`, branch `main`.
-3. Let Railway build the Dockerfile. The app uses Railway's `PORT` and `/health` endpoint.
-4. Generate a public Railway domain and verify the home page, evidence filters, version permalink and JSON export.
-5. Confirm the deployment commit matches GitHub and record the URL and commit here.
+1. Run catalog validation and the Node test suite.
+2. Confirm the merged commit on `main`.
+3. Confirm Vercel builds that commit successfully.
+4. Verify the home page, Canada Lab, evidence catalog, experiments, roadmap, version permalinks, JSON export and `/health`.
+5. Check runtime/build logs for errors.
 
-Rollback by redeploying the previous known-good Git commit. No persistent data migration is required in this release. Do not deploy before CI checks pass. GitHub-to-Railway access for the new repository may require enabling it in the user's Railway GitHub installation.
+## Fallback portability
+
+The Dockerfile and `railway.json` remain in the repository as portable fallback deployment options. Railway was evaluated first but new resource provisioning was blocked by plan limits. No existing Railway project was modified.
+
+## Rollback
+
+Rollback by redeploying or restoring the previous known-good Git commit. No persistent data migration is required in this release.
