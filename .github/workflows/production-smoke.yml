@@ -24,12 +24,17 @@ jobs:
             canada="$(curl -fsS --max-time 15 "$BASE/countries/CA" 2>/dev/null || true)"
             evidence="$(curl -fsS --max-time 15 "$BASE/evidence" 2>/dev/null || true)"
             poc="$(curl -fsS --max-time 15 "$BASE/canada-poc" 2>/dev/null || true)"
+            glossary="$(curl -fsS --max-time 15 "$BASE/glossary" 2>/dev/null || true)"
             if grep -q "Understand change" <<<"$home" \
               && grep -q '"status"[[:space:]]*:[[:space:]]*"ok"' <<<"$health" \
               && grep -q "Canada Lab" <<<"$canada" \
               && grep -q "Evidence and data" <<<"$evidence" \
               && grep -q "SHARE WITH CAVEATS" <<<"$poc" \
-              && grep -q "NOT TRIGGERED" <<<"$poc"; then
+              && grep -q "NOT TRIGGERED" <<<"$poc" \
+              && grep -q "Occupational Transition Pressure Model" <<<"$poc" \
+              && grep -q "Population Exposure Model" <<<"$poc" \
+              && grep -q "Transition Velocity and Protected Transition Margin Model" <<<"$poc" \
+              && grep -q "Minimum viable product" <<<"$glossary"; then
               echo "Production smoke test passed on attempt $attempt"
               ok=1
               break
@@ -50,5 +55,7 @@ jobs:
             curl -i --max-time 20 "$BASE/evidence" || true
             echo "--- CANADA POC HEADERS/BODY ---"
             curl -i --max-time 20 "$BASE/canada-poc" || true
+            echo "--- GLOSSARY HEADERS/BODY ---"
+            curl -i --max-time 20 "$BASE/glossary" || true
             exit 1
           fi
