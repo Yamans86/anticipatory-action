@@ -1,6 +1,8 @@
-import { readFileSync } from 'node:fs';
-export const records = JSON.parse(readFileSync(new URL('../content/records.json', import.meta.url)));
-export const countries = JSON.parse(readFileSync(new URL('../content/countries.json', import.meta.url)));
+import recordsData from '../content/records.json' with { type: 'json' };
+import countriesData from '../content/countries.json' with { type: 'json' };
+
+export const records = recordsData;
+export const countries = countriesData;
 export const types = ['source', 'dataset', 'hypothesis', 'indicator', 'experiment', 'model', 'action'];
 export const latest = [...new Set(records.map(r => r.id))].map(id => records.filter(r => r.id === id).sort((a,b) => b.version.localeCompare(a.version, undefined, {numeric:true}))[0]);
 export const findRecord = (id, version) => (version ? records : latest).find(r => r.id === id && (!version || r.version === version));
