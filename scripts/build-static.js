@@ -64,7 +64,7 @@ for (const record of latest) {
 
 const catalogJson = new URL('api/catalog.json', out);
 mkdirSync(dirname(catalogJson.pathname), { recursive: true });
-writeFileSync(catalogJson, JSON.stringify({ schemaVersion: '1.0.0', release: '0.4.0', countries, records }, null, 2));
+writeFileSync(catalogJson, JSON.stringify({ schemaVersion: '1.0.0', release: '0.4.1', countries, records }, null, 2));
 
 for (const record of records) {
   const file = new URL(`api/objects/${record.id}/v/${record.version}.json`, out);
@@ -72,7 +72,7 @@ for (const record of records) {
   writeFileSync(file, JSON.stringify(record, null, 2));
 }
 
-writeFileSync(new URL('health.json', out), JSON.stringify({ status: 'ok', version: '0.4.0', records: records.length }, null, 2));
+writeFileSync(new URL('health.json', out), JSON.stringify({ status: 'ok', version: '0.4.1', records: records.length }, null, 2));
 copyFileSync(new URL('../public/style.css', import.meta.url), new URL('style.css', out));
 
 const notFound = layout('Page not found', '<div class="intro"><h1>Page not found</h1><p>This page or record version does not exist.</p><a href="/catalog">Browse the research catalog</a></div>', '/404');
