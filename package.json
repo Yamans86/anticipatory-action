@@ -1,6 +1,6 @@
 {
   "name": "anticipatory-action",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "private": true,
   "type": "module",
   "engines": {
@@ -10,6 +10,7 @@
     "start": "node src/server.js",
     "test": "node --test",
     "validate": "node src/validate.js",
-    "experiment:ca-002": "node analysis/canada/exp-ca-002.js"
+    "experiment:ca-002": "node analysis/canada/exp-ca-002.js",
+    "build": "node scripts/build-static.js"
   }
 }
