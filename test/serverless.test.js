@@ -38,3 +38,12 @@ test('legacy src/server.js command only generates static outputs', () => {
   assert.equal(rootHealth.version, '0.3.8');
   assert.equal(srcHealth.version, '0.3.8');
 });
+
+
+test('GitHub Pages build prefixes internal absolute URLs', () => {
+  execFileSync(process.execPath, ['scripts/build-static.js'], { stdio: 'pipe', env: {...process.env, BASE_PATH: '/anticipatory-action'} });
+  const home = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
+  assert.match(home, /href="\/anticipatory-action\/style\.css"/);
+  assert.match(home, /href="\/anticipatory-action\/evidence"/);
+  assert.ok(!home.includes('href="/evidence"'));
+});
