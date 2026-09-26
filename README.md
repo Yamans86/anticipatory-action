@@ -2,7 +2,7 @@
 
 An evidence-first public research platform investigating whether AI-related labour-market change can inform earlier, accountable support. Canada is the first pilot.
 
-**Research scaffold:** no ingested observations, completed research experiments, validated forecasts or operational triggers. Seven initial records distinguish a catalogued publisher source from proposed research work. The software scaffold itself is tested for catalog integrity, routing, filtering, escaping, version links, JSON output, health checks and security headers.
+**Canada evidence build:** the source architecture now includes immigrant labour-market outcomes, occupation employment, detailed vacancies, Canadian AI-exposure research and observed generative-AI use. No real observations have yet been ingested and no research result or operational trigger is published. The first rolling-origin experiment is executable and tested, but remains unrun on real data until its versioned inputs are ready.
 
 ## Run and verify
 
@@ -24,7 +24,9 @@ Open http://localhost:3000. Set `PORT` to override the port. The service binds t
 - `src/pages.js`: narrative and reusable catalog/detail views.
 - `src/server.js`: read-only HTML and JSON endpoints.
 - `public/style.css`: responsive editorial design.
-- `test/`: catalog integrity, route traversal, filters, escaping and HTTP tests.
+- `analysis/canada/`: executable Canada experiment code and input contracts.
+- `data/`: provenance rules and dataset-manifest templates; no unversioned live-data dump.
+- `test/`: catalog integrity, route traversal, filters, escaping, HTTP tests and experiment tests.
 - `docs/`: architecture, editorial and deployment decisions.
 
 Routes include narrative, evidence/data, Canada Lab, hypotheses in the full catalog, indicators, experiments, early warning, actions, methodology, history, roadmap and changelog. `/api/catalog.json` exports all versions. `/objects/{id}/v/{version}` is a version permalink; `/objects/{id}` redirects to the latest version. Unknown records and versions return 404.
@@ -38,6 +40,10 @@ Source metadata is not a copied dataset. Before ingesting data, verify licence a
 ## Deployment
 
 Production target: Vercel, deployed from the `main` branch of this repository. The public site is `https://anticipatory-action.vercel.app/`. The Dockerfile and Railway configuration remain in the repository as portable fallback deployment options. No database or environment secrets are required for the current read-only release. See [deployment notes](docs/deployment.md).
+
+## Canada v0.3 evidence status
+
+The current Canada pilot catalogs Statistics Canada sources for monthly immigrant labour-force outcomes (14-10-0471-01), monthly occupation employment (14-10-0310-02), quarterly detailed occupation vacancies (14-10-0444-01), the Canadian C-AIOE exposure framework, and March 2026 observed generative-AI use. The unresolved constraint is a defensible monthly HELC employment series at sufficient occupational detail. The site documents that gap explicitly rather than manufacturing a proxy.
 
 ## Content status and reuse
 
