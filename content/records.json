@@ -758,5 +758,1250 @@
       "Execution": "Code implemented; real-data run pending versioned inputs",
       "Results": "None on real data"
     }
+  },
+  {
+    "id": "AA-SRC-CA-007",
+    "version": "1.0.0",
+    "type": "source",
+    "country": "CA",
+    "title": "Non-permanent residents in Canada: 2021 Census occupational portrait",
+    "status": "catalogued",
+    "updated": "2026-09-26",
+    "summary": "Statistics Canada profile used to compare occupational structures across selected non-permanent-resident groups.",
+    "body": "The Canada proof of concept used the published 2021 Census portrait to build a top-10 occupational thin slice for asylum claimants, work-permit-only, study-permit-only, work-and-study-permit, and other NPR groups. It supports heterogeneity analysis but not complete population ranking.",
+    "limitations": [
+      "Published top-10 occupations cover only part of each population.",
+      "The thin slice cannot support a complete exposure ranking when uncovered occupational shares are large.",
+      "Population categories and occupational classifications reflect the 2021 Census context."
+    ],
+    "provenance": {
+      "origin": "Statistics Canada, Non-permanent residents in Canada: Portrait of a growing population from the 2021 Census",
+      "url": "https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00006-eng.htm",
+      "accessed": "2026-09-25",
+      "license": "Statistics Canada Open Licence; source acknowledgement required.",
+      "artifact": "Recovered Canada POC notebooks",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [],
+    "details": {
+      "Role": "PEXM population heterogeneity input",
+      "Population groups": "Asylum claimants; work permit only; study permit only; work and study permit; other NPR type",
+      "Coverage rule": "Retain uncovered-share uncertainty; do not extrapolate top-10 ranking to whole populations"
+    }
+  },
+  {
+    "id": "AA-SRC-CA-008",
+    "version": "1.0.0",
+    "type": "source",
+    "country": "CA",
+    "title": "Occupation TEER by immigrant status",
+    "status": "catalogued",
+    "updated": "2026-09-26",
+    "summary": "Statistics Canada 2021 Census table used as a denominator and consistency check for occupational structure.",
+    "body": "Table 98-10-0443-01 was used to check denominator handling in the PEXM validation. The notebook reproduced the published non-permanent-resident share in TEER 5 at approximately 23.7%, supporting the normalization logic.",
+    "limitations": [
+      "TEER is a training/education/responsibility classification, not an AI-exposure measure.",
+      "The table does not provide the detailed NPR-type by occupation matrix needed for full PEXM exposure ranking."
+    ],
+    "provenance": {
+      "origin": "Statistics Canada, Table 98-10-0443-01",
+      "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=9810044301",
+      "accessed": "2026-09-25",
+      "license": "Statistics Canada Open Licence; source acknowledgement required.",
+      "artifact": "Recovered Canada POC v0.2 validation notebook",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-SRC-CA-007",
+        "version": "1.0.0",
+        "relation": "supports denominator check for"
+      }
+    ],
+    "details": {
+      "Validation result": "PEXM denominator handling passed",
+      "Reference result": "NPR TEER 5 share reproduced at approximately 23.7%"
+    }
+  },
+  {
+    "id": "AA-SRC-CA-009",
+    "version": "1.0.0",
+    "type": "source",
+    "country": "CA",
+    "title": "Detailed occupation by admission category",
+    "status": "catalogued",
+    "updated": "2026-09-26",
+    "summary": "Statistics Canada detailed 2021 Census occupation-by-admission-category table identified for the full PEXM matrix.",
+    "body": "Table 98-10-0316-01 exposes detailed occupation by admission category and was identified in v0.2 as the source-ready path for expanding beyond the top-10 thin slice. The validation notebook notes 821 occupations across 35 admission categories.",
+    "limitations": [
+      "Admission category is not identical to current non-permanent-resident type.",
+      "Large matrices require careful suppression, denominator and concordance handling.",
+      "The full matrix has not yet been ingested into the Git-backed data pipeline."
+    ],
+    "provenance": {
+      "origin": "Statistics Canada, Table 98-10-0316-01",
+      "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=9810031601",
+      "accessed": "2026-09-25",
+      "license": "Statistics Canada Open Licence; source acknowledgement required.",
+      "artifact": null,
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [],
+    "details": {
+      "Scale noted in POC": "821 occupations × 35 admission categories",
+      "Readiness": "Source ready; ingestion pending",
+      "Role": "Full PEXM expansion for immigrant admission categories"
+    }
+  },
+  {
+    "id": "AA-SRC-CA-010",
+    "version": "1.0.0",
+    "type": "source",
+    "country": "CA",
+    "title": "Survey of Financial Security Public Use Microdata File",
+    "status": "catalogued",
+    "updated": "2026-09-26",
+    "summary": "Statistics Canada microdata source identified for household assets, debts and income in the Financial Runway layer.",
+    "body": "The v0.2 validation established that the Survey of Financial Security PUMF makes the Financial Runway concept source-feasible. It can support household-level modelling of assets, debts and income, subject to microdata engineering and population linkage.",
+    "limitations": [
+      "The PUMF has not yet been ingested in this repository.",
+      "Migration-status and occupation linkage may require synthetic matching rather than direct observation.",
+      "Net worth must not be treated as liquid resources."
+    ],
+    "provenance": {
+      "origin": "Statistics Canada, Survey of Financial Security PUMF",
+      "url": "https://www150.statcan.gc.ca/n1/pub/13m0006x/13m0006x2021001-eng.htm",
+      "accessed": "2026-09-25",
+      "license": "Verify PUMF redistribution and derived-output conditions before publication.",
+      "artifact": null,
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [],
+    "details": {
+      "Role": "VACM Financial Runway input",
+      "Candidate variables": "Income; chequing/savings; financial assets; debts",
+      "Execution": "Not yet ingested"
+    }
+  },
+  {
+    "id": "AA-SRC-CA-011",
+    "version": "1.0.0",
+    "type": "source",
+    "country": "CA",
+    "title": "2023 Survey of Financial Security questionnaire",
+    "status": "catalogued",
+    "updated": "2026-09-26",
+    "summary": "Questionnaire evidence confirming collection of chequing, savings and other financial-asset components relevant to liquidity.",
+    "body": "The questionnaire was used in v0.2 to confirm that the SFS instrument collects components needed to distinguish liquid financial buffers from total net worth.",
+    "limitations": [
+      "Questionnaire coverage does not prove every variable is available with the same detail in a public-use file.",
+      "Operational definitions of liquid resources still require a documented basket."
+    ],
+    "provenance": {
+      "origin": "Statistics Canada, 2023 Survey of Financial Security questionnaire",
+      "url": "https://www23.statcan.gc.ca/imdb/p3Instr.pl?Function=assembleInstr&Item_Id=1443668&lang=en",
+      "accessed": "2026-09-25",
+      "license": "Statistics Canada terms apply.",
+      "artifact": null,
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-SRC-CA-010",
+        "version": "1.0.0",
+        "relation": "documents variables collected by"
+      }
+    ],
+    "details": {
+      "Role": "VACM variable-definition evidence",
+      "Confirmed concept": "Chequing/savings and other financial assets are explicitly collected"
+    }
+  },
+  {
+    "id": "AA-SRC-CA-012",
+    "version": "1.0.0",
+    "type": "source",
+    "country": "CA",
+    "title": "Survey of Household Spending Public Use Microdata File",
+    "status": "catalogued",
+    "updated": "2026-09-26",
+    "summary": "Statistics Canada expenditure microdata source identified for estimating household spending needs in Financial Runway.",
+    "body": "The v0.2 validation identified the Survey of Household Spending PUMF as a source for observed household expenditure to complement liquid-resource estimates from financial microdata.",
+    "limitations": [
+      "The PUMF has not yet been ingested.",
+      "Household expenditure must be aligned to geography, household type and time period.",
+      "Observed spending and a normative minimum-needs floor answer different questions and should remain separate."
+    ],
+    "provenance": {
+      "origin": "Statistics Canada, Survey of Household Spending PUMF",
+      "url": "https://www150.statcan.gc.ca/n1/en/catalogue/62M0004X2019001",
+      "accessed": "2026-09-25",
+      "license": "Verify PUMF redistribution and derived-output conditions before publication.",
+      "artifact": null,
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [],
+    "details": {
+      "Role": "VACM spending input",
+      "Execution": "Not yet ingested"
+    }
+  },
+  {
+    "id": "AA-SRC-CA-013",
+    "version": "1.0.0",
+    "type": "source",
+    "country": "CA",
+    "title": "Market Basket Measure thresholds",
+    "status": "catalogued",
+    "updated": "2026-09-26",
+    "summary": "Statistics Canada MBM thresholds identified as a minimum-needs floor for Financial Runway scenarios.",
+    "body": "Table 11-10-0066-01 provides Market Basket Measure thresholds. The Canada POC treats this as a possible minimum-needs floor distinct from observed household expenditure.",
+    "limitations": [
+      "MBM thresholds are not the same as a household's observed weekly spending.",
+      "Geographic and household-composition choices materially affect the applicable threshold.",
+      "The POC did not yet integrate MBM thresholds into a population-specific runway estimate."
+    ],
+    "provenance": {
+      "origin": "Statistics Canada, Table 11-10-0066-01",
+      "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1110006601",
+      "accessed": "2026-09-25",
+      "license": "Statistics Canada Open Licence; source acknowledgement required.",
+      "artifact": null,
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [],
+    "details": {
+      "Role": "VACM minimum-needs reference",
+      "Execution": "Source identified; calibration pending"
+    }
+  },
+  {
+    "id": "AA-SRC-CA-014",
+    "version": "1.0.0",
+    "type": "source",
+    "country": "CA",
+    "title": "Unemployment duration",
+    "status": "catalogued",
+    "updated": "2026-09-26",
+    "summary": "Statistics Canada unemployment-duration table used only as a provisional calibration reference for transition time.",
+    "body": "Table 14-10-0057-01 provided the 2025 average unemployment-duration reference used in the TVPM sensitivity test. The notebook used 21.8 weeks as an any-job reference, not as a validated sustainable-transition duration.",
+    "limitations": [
+      "Time to any employment is not time to sustainable employment.",
+      "Occupation changes, credential recognition and retraining can materially lengthen transition time.",
+      "The calibration must be replaced by pathway-specific transition evidence before operational use."
+    ],
+    "provenance": {
+      "origin": "Statistics Canada, Table 14-10-0057-01",
+      "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410005701",
+      "accessed": "2026-09-25",
+      "license": "Statistics Canada Open Licence; source acknowledgement required.",
+      "artifact": "Recovered Canada POC v0.2 validation notebook",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [],
+    "details": {
+      "2025 reference": "21.8 weeks average unemployment duration",
+      "Use": "Calibration proxy only",
+      "Prohibition": "Do not interpret as sustainable-transition time"
+    }
+  },
+  {
+    "id": "AA-SRC-CA-015",
+    "version": "1.0.0",
+    "type": "source",
+    "country": "CA",
+    "title": "Employment Insurance regular benefit parameters",
+    "status": "catalogued",
+    "updated": "2026-09-26",
+    "summary": "Canada.ca programme rules used to encode a reactive income-protection baseline in the policy model.",
+    "body": "The POC encoded EI regular benefits as a post-layoff policy mechanism, using a basic replacement rate around 55% and entitlement duration that varies by eligibility and regional conditions.",
+    "limitations": [
+      "Actual eligibility, insurable hours, regional unemployment and benefit caps vary by claimant.",
+      "The POC policy scenario is illustrative and is not an estimate of realized programme effectiveness."
+    ],
+    "provenance": {
+      "origin": "Government of Canada, EI regular benefit amount",
+      "url": "https://www.canada.ca/en/services/benefits/ei/ei-regular-benefit/benefit-amount.html",
+      "accessed": "2026-09-25",
+      "license": "Government of Canada terms apply.",
+      "artifact": "Recovered Canada POC notebooks",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [],
+    "details": {
+      "Function": "Post-layoff income support",
+      "Approximate replacement used in POC": "55%",
+      "Duration represented in POC": "14–45 weeks, scenario-specific entitlement"
+    }
+  },
+  {
+    "id": "AA-SRC-CA-016",
+    "version": "1.0.0",
+    "type": "source",
+    "country": "CA",
+    "title": "Work-Sharing eligibility",
+    "status": "catalogued",
+    "updated": "2026-09-26",
+    "summary": "Canada.ca eligibility rules used to test Work-Sharing as a pre-layoff retention mechanism.",
+    "body": "The POC encoded Work-Sharing as an anticipatory-ish retention mechanism and identified a substantive shock-fit question: regular rules exclude some work reductions resulting from employer decisions to increase efficiencies or profits through reduced staffing.",
+    "limitations": [
+      "This does not establish that every AI-enabled restructuring is ineligible.",
+      "Legal and programme interpretation is required for specific restructuring scenarios.",
+      "Statutory eligibility and realized take-up must be modelled separately."
+    ],
+    "provenance": {
+      "origin": "Government of Canada, Work-Sharing eligibility",
+      "url": "https://www.canada.ca/en/employment-social-development/services/work-sharing/eligibility.html",
+      "accessed": "2026-09-25",
+      "license": "Government of Canada terms apply.",
+      "artifact": "Recovered Canada POC v0.2 validation notebook",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [],
+    "details": {
+      "Function": "Pre-layoff retention",
+      "Standard agreement represented": "26 weeks plus possible extension",
+      "Key finding": "AI efficiency restructuring may face a shock-fit gap"
+    }
+  },
+  {
+    "id": "AA-SRC-CA-017",
+    "version": "1.0.0",
+    "type": "source",
+    "country": "CA",
+    "title": "Work-Sharing statistics",
+    "status": "catalogued",
+    "updated": "2026-09-26",
+    "summary": "Government of Canada programme statistics retained as contextual evidence for Work-Sharing implementation.",
+    "body": "The validation notebook included Work-Sharing statistics in the source register to support later policy-engine testing and realized-take-up analysis.",
+    "limitations": [
+      "Programme statistics do not by themselves establish suitability for AI-related restructuring.",
+      "Historical use may not represent future eligibility or demand."
+    ],
+    "provenance": {
+      "origin": "Government of Canada, Work-Sharing statistics",
+      "url": "https://www.canada.ca/en/employment-social-development/services/work-sharing/statistics.html",
+      "accessed": "2026-09-25",
+      "license": "Government of Canada terms apply.",
+      "artifact": null,
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-SRC-CA-016",
+        "version": "1.0.0",
+        "relation": "implementation context for"
+      }
+    ],
+    "details": {
+      "Role": "PBGM take-up and implementation context",
+      "Execution": "Not yet integrated into calibrated policy model"
+    }
+  },
+  {
+    "id": "AA-SRC-CA-018",
+    "version": "1.0.0",
+    "type": "source",
+    "country": "CA",
+    "title": "Worker Retention Grant",
+    "status": "catalogued",
+    "updated": "2026-09-26",
+    "summary": "Government of Canada retention-and-training mechanism mapped in the POC alongside Work-Sharing.",
+    "body": "The POC represented the Worker Retention Grant as a retention and training mechanism linked to an approved and implemented Work-Sharing agreement, with an illustrative replacement level around 70% of lost income.",
+    "limitations": [
+      "Programme access is conditional and linked to Work-Sharing.",
+      "The POC figures are rule encodings, not estimates of take-up or effectiveness.",
+      "Eligibility and policy fit must be checked for any AI-related scenario."
+    ],
+    "provenance": {
+      "origin": "Government of Canada, Worker Retention Grant",
+      "url": "https://www.canada.ca/en/employment-social-development/services/funding/worker-retention-grant/overview.html",
+      "accessed": "2026-09-25",
+      "license": "Government of Canada terms apply.",
+      "artifact": "Recovered Canada POC notebooks",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-SRC-CA-016",
+        "version": "1.0.0",
+        "relation": "requires qualifying mechanism from"
+      }
+    ],
+    "details": {
+      "Function": "Retention plus training",
+      "Approximate replacement represented in POC": "70%",
+      "Critical gate": "Approved and implemented Work-Sharing agreement"
+    }
+  },
+  {
+    "id": "AA-DAT-CA-005",
+    "version": "0.2.0",
+    "type": "dataset",
+    "country": "CA",
+    "title": "PEXM NPR occupational thin slice",
+    "status": "validated",
+    "updated": "2026-09-26",
+    "summary": "Executed top-10 occupational slice for five non-permanent-resident groups, with explicit coverage bounds.",
+    "body": "The computational POC manually encoded published top-10 occupations for selected NPR types and mapped them to broad occupational GenAI-use environments. v0.2 retained the heterogeneity result but withdrew any full-population exposure ranking because top-10 coverage ranged from roughly one-quarter to just over one-half of each group.",
+    "limitations": [
+      "Coverage is incomplete and differs materially by population group.",
+      "Broad occupation mapping is intentionally coarse.",
+      "The correct result is heterogeneity, not an ordered ranking of whole NPR populations."
+    ],
+    "provenance": {
+      "origin": "Recovered Canada POC v0.2 validation notebook using Statistics Canada 2021 Census NPR portrait",
+      "url": "https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00006-eng.htm",
+      "accessed": "2026-09-25",
+      "license": "Derived research summary; underlying Statistics Canada material under Open Licence.",
+      "artifact": "canada_poc_v0_2_validation.ipynb",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-SRC-CA-007",
+        "version": "1.0.0",
+        "relation": "source"
+      },
+      {
+        "id": "AA-SRC-CA-006",
+        "version": "1.0.0",
+        "relation": "broad GenAI-use mapping source"
+      }
+    ],
+    "details": {
+      "Asylum claimants top-10 coverage": "41.8%",
+      "Work and study permit coverage": "39.2%",
+      "Study permit only coverage": "54.7%",
+      "Work permit only coverage": "25.0%",
+      "Other NPR type coverage": "23.1%",
+      "Validation conclusion": "NPR types have materially different occupational structures; full-population ranking requires complete matrix"
+    }
+  },
+  {
+    "id": "AA-DAT-CA-006",
+    "version": "0.2.0",
+    "type": "dataset",
+    "country": "CA",
+    "title": "Financial Runway source stack",
+    "status": "planned",
+    "updated": "2026-09-26",
+    "summary": "Defined source architecture for combining household liquidity, debt, expenditure and minimum-needs floors.",
+    "body": "v0.2 changed Financial Runway from a conceptual data gap to a source-feasible engineering task. The required source families exist, but no single public table jointly links occupation, migration status and liquid financial resources.",
+    "limitations": [
+      "SFS and SHS microdata have not yet been ingested.",
+      "Population-specific occupation × finance cells require defensible synthetic linkage or more detailed access.",
+      "Liquid assets, net worth, observed expenditure and minimum-needs floors must remain distinct."
+    ],
+    "provenance": {
+      "origin": "Canada POC v0.2 data-engineering design",
+      "url": null,
+      "accessed": "2026-09-25",
+      "license": "Project-authored design using public Canadian source families.",
+      "artifact": "canada_poc_v0_2_validation.ipynb",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-SRC-CA-010",
+        "version": "1.0.0",
+        "relation": "asset/debt input"
+      },
+      {
+        "id": "AA-SRC-CA-011",
+        "version": "1.0.0",
+        "relation": "variable-definition evidence"
+      },
+      {
+        "id": "AA-SRC-CA-012",
+        "version": "1.0.0",
+        "relation": "expenditure input"
+      },
+      {
+        "id": "AA-SRC-CA-013",
+        "version": "1.0.0",
+        "relation": "minimum-needs input"
+      }
+    ],
+    "details": {
+      "Readiness": "Source-feasible; microdata engineering pending",
+      "Missing join": "Occupation × liquid assets × migration status",
+      "Required method": "Population-specific synthetic linkage with explicit uncertainty"
+    }
+  },
+  {
+    "id": "AA-DAT-CA-007",
+    "version": "0.2.0",
+    "type": "dataset",
+    "country": "CA",
+    "title": "Transition-time calibration reference",
+    "status": "validated",
+    "updated": "2026-09-26",
+    "summary": "A provisional transition-time reference built from 2025 average unemployment duration for sensitivity testing only.",
+    "body": "The TVPM validation used 21.8 weeks as an average unemployment-duration reference and multiplied it under alternative sustainable-transition assumptions. This dataset exists only to stress-test mechanics; it is not a validated sustainable-transition distribution.",
+    "limitations": [
+      "Any-job unemployment duration is an imperfect proxy for sustainable occupational transition.",
+      "The distribution does not encode origin-destination occupation, credentials or training pathways.",
+      "It must not be used to set operational thresholds."
+    ],
+    "provenance": {
+      "origin": "Canada POC v0.2 using Statistics Canada Table 14-10-0057-01",
+      "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410005701",
+      "accessed": "2026-09-25",
+      "license": "Derived research summary; Statistics Canada source under Open Licence.",
+      "artifact": "canada_poc_v0_2_validation.ipynb",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-SRC-CA-014",
+        "version": "1.0.0",
+        "relation": "source"
+      }
+    ],
+    "details": {
+      "Reference mean": "21.8 weeks",
+      "Use": "TVPM sensitivity calibration only",
+      "Operational use": "Prohibited pending pathway-specific transition evidence"
+    }
+  },
+  {
+    "id": "AA-IND-CA-005",
+    "version": "0.2.0",
+    "type": "indicator",
+    "country": "CA",
+    "title": "Relative HELC vacancy deterioration",
+    "status": "validated",
+    "updated": "2026-09-26",
+    "summary": "Difference between vacancy change in high-exposure/low-complementarity and low-exposure occupations.",
+    "body": "The POC uses relative deterioration rather than raw vacancy decline to reduce false attribution. In the source-backed 2022Q4–2025Q3 comparison, HELC vacancies fell by about 50% and low-exposure vacancies also fell by about 50%, producing approximately zero percentage-point relative deterioration.",
+    "limitations": [
+      "Approximate published values are used rather than a versioned raw extract.",
+      "Vacancy change alone does not establish AI causation.",
+      "Exposure groups are occupational aggregates and can conceal within-group variation."
+    ],
+    "provenance": {
+      "origin": "Canada POC v0.2 calculation from Statistics Canada AI-employment study",
+      "url": "https://www150.statcan.gc.ca/n1/pub/36-28-0001/2026001/article/00003-eng.htm",
+      "accessed": "2026-09-25",
+      "license": "Derived research summary; Statistics Canada source under Open Licence.",
+      "artifact": "canada_poc_v0_2_validation.ipynb",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-SRC-CA-005",
+        "version": "1.0.0",
+        "relation": "source"
+      }
+    ],
+    "details": {
+      "Formula": "HELC vacancy % change - low-exposure vacancy % change",
+      "POC value": "Approximately 0 percentage points",
+      "Interpretation": "No differential labour-demand deterioration in this comparison"
+    }
+  },
+  {
+    "id": "AA-IND-CA-006",
+    "version": "0.2.0",
+    "type": "indicator",
+    "country": "CA",
+    "title": "Occupational-mix reallocation dissimilarity",
+    "status": "validated",
+    "updated": "2026-09-26",
+    "summary": "A reallocation metric used with COVID and baseline periods as negative controls for AI attribution.",
+    "body": "The v0.2 validation compared occupational-mix dissimilarity after the AI-period reference point with COVID and a stable baseline. COVID moved faster in the first months; over longer windows AI-period change was broadly similar to baseline technological change.",
+    "limitations": [
+      "The metric detects labour reallocation, not its cause.",
+      "Series were transcribed from a published Statistics Canada chart for POC validation.",
+      "Historical controls cannot eliminate every confounder."
+    ],
+    "provenance": {
+      "origin": "Canada POC v0.2 negative-control test based on Statistics Canada published occupational-mix chart",
+      "url": "https://www150.statcan.gc.ca/n1/pub/36-28-0001/2026001/article/00003-eng.htm",
+      "accessed": "2026-09-25",
+      "license": "Derived research summary; Statistics Canada source under Open Licence.",
+      "artifact": "canada_poc_v0_2_validation.ipynb",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-SRC-CA-005",
+        "version": "1.0.0",
+        "relation": "source"
+      }
+    ],
+    "details": {
+      "3-month change": "AI 2.7; COVID 4.3; baseline 2.8",
+      "6-month change": "AI 4.8; COVID 5.9; baseline 4.7",
+      "12-month change": "AI 6.1; COVID 6.7; baseline 6.1",
+      "24-month change": "AI 7.0; COVID 6.9; baseline 6.6",
+      "Conclusion": "Labour reallocation requires a separate AI-attribution layer"
+    }
+  },
+  {
+    "id": "AA-IND-CA-007",
+    "version": "0.2.0",
+    "type": "indicator",
+    "country": "CA",
+    "title": "Financial Runway",
+    "status": "proposed",
+    "updated": "2026-09-26",
+    "summary": "Candidate measure of how long a household can meet essential needs using liquid resources and support after a shock.",
+    "body": "Financial Runway is intended to distinguish households with different shock-absorption capacity. v0.2 established source feasibility but did not estimate the metric because the required liquid-resource and expenditure microdata have not been engineered into a population-by-occupation dataset.",
+    "limitations": [
+      "No empirical Financial Runway distribution has been estimated.",
+      "Net worth cannot substitute for liquid financial resources.",
+      "Synthetic linkage uncertainty must be reported if direct joint observations are unavailable."
+    ],
+    "provenance": {
+      "origin": "Canada POC VACM design",
+      "url": null,
+      "accessed": "2026-09-25",
+      "license": "Project-authored metric definition.",
+      "artifact": "canada_poc_v0_2_validation.ipynb",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-DAT-CA-006",
+        "version": "0.2.0",
+        "relation": "requires"
+      }
+    ],
+    "details": {
+      "Concept": "Liquid resources relative to essential expenditure, with policy support incorporated separately",
+      "Status": "Source-feasible; not estimated",
+      "Do not use": "Aggregate net worth as a direct runway proxy"
+    }
+  },
+  {
+    "id": "AA-IND-CA-008",
+    "version": "0.2.0",
+    "type": "indicator",
+    "country": "CA",
+    "title": "Timely Transition Probability",
+    "status": "validated",
+    "updated": "2026-09-26",
+    "summary": "Scenario metric estimating the probability that a worker completes a transition within the effective transition window.",
+    "body": "TVPM sensitivity tests calculate TTP as the share of simulated transition durations that fall within lead time plus protected runway. The mechanics passed monotonicity tests: more lead time or protection raises TTP, while slower transition assumptions reduce it.",
+    "limitations": [
+      "The transition-time distribution is not empirically calibrated for sustainable transitions.",
+      "Scenario outputs are not estimates of programme effectiveness.",
+      "No operational TTP trigger threshold is approved."
+    ],
+    "provenance": {
+      "origin": "Canada POC v0.2 TVPM sensitivity test",
+      "url": null,
+      "accessed": "2026-09-25",
+      "license": "Project-authored metric; source calibration uses public Statistics Canada data.",
+      "artifact": "canada_poc_v0_2_validation.ipynb",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-DAT-CA-007",
+        "version": "0.2.0",
+        "relation": "calibration reference"
+      }
+    ],
+    "details": {
+      "Definition": "P(transition time ≤ effective lead time + protected runway)",
+      "Structural validation": "Passed monotonicity assertions",
+      "Operational threshold": "Not set"
+    }
+  },
+  {
+    "id": "AA-IND-CA-009",
+    "version": "0.2.0",
+    "type": "indicator",
+    "country": "CA",
+    "title": "Protected Transition Margin",
+    "status": "validated",
+    "updated": "2026-09-26",
+    "summary": "Candidate timing margin comparing available transition time with the time required for a sustainable transition.",
+    "body": "PTM is retained as a candidate decision metric in the Canada architecture. The POC demonstrated coherent response to changes in lead time, protection duration and transition assumptions, but calibration remains too uncertain for operational triggering.",
+    "limitations": [
+      "No validated sustainable-transition distribution exists.",
+      "Policy latency, eligibility and realized take-up affect the actual protected window.",
+      "No operational threshold has been frozen."
+    ],
+    "provenance": {
+      "origin": "Canada POC v0.1-v0.2 timing architecture",
+      "url": null,
+      "accessed": "2026-09-25",
+      "license": "Project-authored metric.",
+      "artifact": "Recovered Canada POC notebooks",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-IND-CA-008",
+        "version": "0.2.0",
+        "relation": "paired timing metric with"
+      }
+    ],
+    "details": {
+      "Role": "Candidate decision metric",
+      "Status": "Mechanics usable; calibration not production-ready"
+    }
+  },
+  {
+    "id": "AA-MOD-CA-002",
+    "version": "0.2.0",
+    "type": "model",
+    "country": "CA",
+    "title": "OTPM-lite: exposure, deployment and labour-pressure gate",
+    "status": "validated",
+    "updated": "2026-09-26",
+    "summary": "Validated POC gate that keeps technical AI exposure, observed deployment and labour deterioration separate.",
+    "body": "OTPM-lite asks whether high AI exposure is accompanied by observed use and differential labour deterioration. In the Canada validation, HELC worker GenAI use was high, but vacancy deterioration was not worse than low-exposure occupations and broad employment still grew. The POC therefore stayed in an active deployment/watch state rather than structural transition.",
+    "limitations": [
+      "This is a proof-of-concept gate, not a production warning model.",
+      "Published summary values were used instead of a fully versioned ingestion pipeline.",
+      "Causal attribution remains insufficient and must stay separate."
+    ],
+    "provenance": {
+      "origin": "Canada Computational POC v0.2 validation",
+      "url": null,
+      "accessed": "2026-09-25",
+      "license": "Project-authored model architecture.",
+      "artifact": "canada_poc_v0_2_validation.ipynb",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-SRC-CA-005",
+        "version": "1.0.0",
+        "relation": "exposure and labour evidence"
+      },
+      {
+        "id": "AA-SRC-CA-006",
+        "version": "1.0.0",
+        "relation": "observed adoption evidence"
+      },
+      {
+        "id": "AA-IND-CA-005",
+        "version": "0.2.0",
+        "relation": "relative deterioration gate"
+      }
+    ],
+    "details": {
+      "Technical exposure": "High for HELC",
+      "Observed deployment": "High",
+      "Employment confirmation": "False for structural displacement",
+      "Causal attribution": "Insufficient",
+      "POC state": "State 2 - Active deployment/watch",
+      "Current structural alarm": "Not triggered"
+    }
+  },
+  {
+    "id": "AA-MOD-CA-003",
+    "version": "0.2.0",
+    "type": "model",
+    "country": "CA",
+    "title": "PEXM: population exposure heterogeneity",
+    "status": "validated",
+    "updated": "2026-09-26",
+    "summary": "Population exposure layer that preserves differences between migrant and non-permanent-resident groups instead of treating them as one category.",
+    "body": "PEXM was validated on a top-10 occupational thin slice. Selected NPR groups have materially different occupational structures, so group identity must be retained. v0.2 downgraded the earlier directional exposure ranking because uncovered occupational shares create overlapping uncertainty bounds.",
+    "limitations": [
+      "The thin slice does not cover full populations.",
+      "A complete population × occupation matrix is required for robust group-level exposure estimates.",
+      "Group identity is an analytical segmentation, not a vulnerability score."
+    ],
+    "provenance": {
+      "origin": "Canada Computational POC v0.2 validation",
+      "url": null,
+      "accessed": "2026-09-25",
+      "license": "Project-authored model architecture.",
+      "artifact": "canada_poc_v0_2_validation.ipynb",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-DAT-CA-005",
+        "version": "0.2.0",
+        "relation": "validated thin-slice input"
+      },
+      {
+        "id": "AA-SRC-CA-009",
+        "version": "1.0.0",
+        "relation": "full-matrix source path"
+      }
+    ],
+    "details": {
+      "Heterogeneity": "Passed",
+      "Top-10 full-population ranking": "Failed / downgraded",
+      "Full detailed matrix": "Source ready; ingestion pending",
+      "Core rule": "Never collapse distinct NPR/migrant groups into one exposure estimate without evidence"
+    }
+  },
+  {
+    "id": "AA-MOD-CA-004",
+    "version": "0.2.0",
+    "type": "model",
+    "country": "CA",
+    "title": "VACM: vulnerability and financial-buffer layer",
+    "status": "concept",
+    "updated": "2026-09-26",
+    "summary": "Fragility layer that separates exposure to labour change from a household's capacity to absorb income loss.",
+    "body": "VACM uses household financial resources and essential expenditure to represent shock-absorption capacity. The POC validated that recent immigrant families show different income-wealth distributions from established immigrant and Canadian-born families, while v0.2 established that true Financial Runway is source-feasible but still requires microdata engineering.",
+    "limitations": [
+      "The POC did not estimate population-specific liquid financial runway.",
+      "Published aggregate wealth includes non-liquid assets.",
+      "Occupation, migration status and liquid financial data are not yet jointly observed in one public dataset."
+    ],
+    "provenance": {
+      "origin": "Canada Computational POC v0.1-v0.2",
+      "url": null,
+      "accessed": "2026-09-25",
+      "license": "Project-authored model architecture.",
+      "artifact": "Recovered Canada POC notebooks",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-DAT-CA-006",
+        "version": "0.2.0",
+        "relation": "planned financial data stack"
+      },
+      {
+        "id": "AA-IND-CA-007",
+        "version": "0.2.0",
+        "relation": "candidate output"
+      }
+    ],
+    "details": {
+      "Structural fragility distinction": "Passed in POC",
+      "Recent immigrant lower-wealth share noted in v0.1": "45.9% across three income bands in pooled SFS table",
+      "Established immigrant comparison": "18.3%",
+      "Canadian-born comparison": "22.8%",
+      "Actual liquid runway": "Not validated"
+    }
+  },
+  {
+    "id": "AA-MOD-CA-005",
+    "version": "0.2.0",
+    "type": "model",
+    "country": "CA",
+    "title": "PBGM: policy buffer and gap model",
+    "status": "validated",
+    "updated": "2026-09-26",
+    "summary": "Policy layer that encodes eligibility, timing, replacement and duration while exposing gaps between a shock and programme rules.",
+    "body": "PBGM successfully represented EI, Work-Sharing and Worker Retention Grant parameters in the POC. The central unresolved issue is policy fit: a mechanism can look useful mathematically while statutory rules may not cover a deliberate efficiency-driven restructuring.",
+    "limitations": [
+      "Rule encoding does not establish individual eligibility or take-up.",
+      "Programme rules can change and require dated source versions.",
+      "Work-Sharing shock fit for AI-enabled efficiency restructuring remains an open policy question."
+    ],
+    "provenance": {
+      "origin": "Canada Computational POC v0.2 validation",
+      "url": null,
+      "accessed": "2026-09-25",
+      "license": "Project-authored model architecture.",
+      "artifact": "canada_poc_v0_2_validation.ipynb",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-SRC-CA-015",
+        "version": "1.0.0",
+        "relation": "EI rule source"
+      },
+      {
+        "id": "AA-SRC-CA-016",
+        "version": "1.0.0",
+        "relation": "Work-Sharing eligibility source"
+      },
+      {
+        "id": "AA-SRC-CA-018",
+        "version": "1.0.0",
+        "relation": "Worker Retention Grant source"
+      }
+    ],
+    "details": {
+      "Rule encoding": "Passed",
+      "AI shock fit": "Open policy gap",
+      "Core dimensions": "Eligibility; latency; replacement; duration; realized take-up"
+    }
+  },
+  {
+    "id": "AA-MOD-CA-006",
+    "version": "0.2.0",
+    "type": "model",
+    "country": "CA",
+    "title": "TVPM: transition-window probability model",
+    "status": "validated",
+    "updated": "2026-09-26",
+    "summary": "Timing layer testing whether warning lead time and protected income support create enough time for a sustainable labour transition.",
+    "body": "TVPM computes candidate timing metrics including Timely Transition Probability and Protected Transition Margin. v0.2 structural assertions passed: more lead time and more protected runway increase TTP, while slower transition assumptions reduce it. Calibration remains too sensitive for operational thresholds.",
+    "limitations": [
+      "The transition distribution uses unemployment duration only as a provisional reference.",
+      "Sustainable transition requires origin-destination and pathway-specific evidence.",
+      "Credential recognition, training duration and job quality are not yet empirically calibrated."
+    ],
+    "provenance": {
+      "origin": "Canada Computational POC v0.2 validation",
+      "url": null,
+      "accessed": "2026-09-25",
+      "license": "Project-authored model architecture.",
+      "artifact": "canada_poc_v0_2_validation.ipynb",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-IND-CA-008",
+        "version": "0.2.0",
+        "relation": "primary probability metric"
+      },
+      {
+        "id": "AA-IND-CA-009",
+        "version": "0.2.0",
+        "relation": "paired margin metric"
+      },
+      {
+        "id": "AA-DAT-CA-007",
+        "version": "0.2.0",
+        "relation": "provisional calibration"
+      }
+    ],
+    "details": {
+      "Equation integrity": "Passed",
+      "Calibration": "Not validated",
+      "32-week window sensitivity": "TTP approximately 83.5%, 71.4%, 59.2%, 38.7% as transition-time multiplier rises from 1.0 to 2.0",
+      "Operational threshold": "Not set"
+    }
+  },
+  {
+    "id": "AA-EXP-CA-003",
+    "version": "0.1.0",
+    "type": "experiment",
+    "country": "CA",
+    "title": "Canada Computational Proof of Concept v0.1",
+    "status": "validated",
+    "updated": "2026-09-26",
+    "summary": "Executed thin-slice test of the OTPM → PEXM → VACM → PBGM → TVPM computational chain.",
+    "body": "The 25 September 2026 POC tested whether the modelling chain could run end-to-end using public Canadian evidence plus explicitly labelled scenario assumptions, without turning AI exposure directly into displacement or population identity directly into vulnerability.",
+    "limitations": [
+      "Several inputs were manually transcribed from published summaries rather than ingested through a reproducible data pipeline.",
+      "PBGM/TVPM scenarios were illustrative, not population estimates.",
+      "v0.2 subsequently downgraded the thin-slice NPR ranking and revised the Financial Runway data-gap assessment."
+    ],
+    "provenance": {
+      "origin": "Recovered project notebook: canada_poc_v0_1.ipynb",
+      "url": null,
+      "accessed": "2026-09-25",
+      "license": "Project-authored notebook using cited public sources.",
+      "artifact": "canada_poc_v0_1.ipynb",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-MOD-CA-002",
+        "version": "0.2.0",
+        "relation": "tests architecture later retained as"
+      },
+      {
+        "id": "AA-MOD-CA-003",
+        "version": "0.2.0",
+        "relation": "tests architecture later retained as"
+      },
+      {
+        "id": "AA-MOD-CA-004",
+        "version": "0.2.0",
+        "relation": "tests architecture later retained as"
+      },
+      {
+        "id": "AA-MOD-CA-005",
+        "version": "0.2.0",
+        "relation": "tests architecture later retained as"
+      },
+      {
+        "id": "AA-MOD-CA-006",
+        "version": "0.2.0",
+        "relation": "tests architecture later retained as"
+      }
+    ],
+    "details": {
+      "Evidence cut-off": "25 September 2026",
+      "Architecture verdict": "Survives",
+      "Production readiness": "Not yet",
+      "Primary blockers": "Liquid financial buffers; full population×occupation ingestion; pathway-specific transition time; policy eligibility/take-up integration"
+    }
+  },
+  {
+    "id": "AA-EXP-CA-004",
+    "version": "0.2.0",
+    "type": "experiment",
+    "country": "CA",
+    "title": "Canada POC v0.2 validation and data-engineering gate",
+    "status": "validated",
+    "updated": "2026-09-26",
+    "summary": "Executed validation of the Canada quantitative architecture using authoritative evidence, negative controls, coverage tests, sensitivity analysis and assertions.",
+    "body": "v0.2 retained the five-layer architecture while tightening its claims. OTPM passed and the current structural displacement alarm was not triggered; PEXM heterogeneity passed while whole-population ranking was downgraded; Financial Runway became source-feasible but unestimated; PBGM rule encoding passed with an open shock-fit gap; TVPM mechanics passed while calibration remained unvalidated.",
+    "limitations": [
+      "This is a proof-of-concept validation, not production calibration.",
+      "The original notebook has not yet been converted into a fully automated ingestion-and-run artifact in this repository.",
+      "Several source-backed inputs are summary values or chart transcriptions rather than raw versioned datasets."
+    ],
+    "provenance": {
+      "origin": "Recovered project notebook: canada_poc_v0_2_validation.ipynb",
+      "url": null,
+      "accessed": "2026-09-25",
+      "license": "Project-authored notebook using cited public sources.",
+      "artifact": "canada_poc_v0_2_validation.ipynb",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-EXP-CA-003",
+        "version": "0.1.0",
+        "relation": "validates and revises"
+      },
+      {
+        "id": "AA-MOD-CA-002",
+        "version": "0.2.0",
+        "relation": "validates"
+      },
+      {
+        "id": "AA-MOD-CA-003",
+        "version": "0.2.0",
+        "relation": "validates"
+      },
+      {
+        "id": "AA-MOD-CA-004",
+        "version": "0.2.0",
+        "relation": "validates feasibility of"
+      },
+      {
+        "id": "AA-MOD-CA-005",
+        "version": "0.2.0",
+        "relation": "validates mechanics of"
+      },
+      {
+        "id": "AA-MOD-CA-006",
+        "version": "0.2.0",
+        "relation": "validates mechanics of"
+      }
+    ],
+    "details": {
+      "Overall verdict": "SHARE WITH CAVEATS - architecture retained, calibration not yet production-ready",
+      "Current broad structural AI-displacement alarm": "NOT TRIGGERED",
+      "AI attribution separation": "PASS / REQUIRED",
+      "PEXM top-10 ranking": "FAIL / DOWNGRADED",
+      "VACM actual liquid runway": "NOT YET VALIDATED",
+      "PBGM AI shock fit": "OPEN POLICY GAP",
+      "TVPM empirical calibration": "NOT YET VALIDATED",
+      "Next step": "Canada Quantitative Engine v1.0 - data ingestion + calibration"
+    }
+  },
+  {
+    "id": "AA-EXP-CA-005",
+    "version": "0.2.0",
+    "type": "experiment",
+    "country": "CA",
+    "title": "COVID negative-control occupational reallocation test",
+    "status": "validated",
+    "updated": "2026-09-26",
+    "summary": "Negative-control test showing that labour reallocation can accelerate without AI being the causal driver.",
+    "body": "The v0.2 test compared occupational-mix dissimilarity in the AI period, COVID shock and a stable baseline. COVID reallocation was faster in the first months, while longer-window AI-period change was broadly similar to baseline change. The result validates the requirement for a separate AI-attribution layer.",
+    "limitations": [
+      "Chart-derived values are approximate.",
+      "COVID is a useful but imperfect negative control.",
+      "The test demonstrates non-specificity of labour change, not the absence of all AI effects."
+    ],
+    "provenance": {
+      "origin": "Canada POC v0.2 negative-control experiment",
+      "url": "https://www150.statcan.gc.ca/n1/pub/36-28-0001/2026001/article/00003-eng.htm",
+      "accessed": "2026-09-25",
+      "license": "Derived research summary; Statistics Canada source under Open Licence.",
+      "artifact": "canada_poc_v0_2_validation.ipynb",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-IND-CA-006",
+        "version": "0.2.0",
+        "relation": "tests"
+      },
+      {
+        "id": "AA-MOD-CA-002",
+        "version": "0.2.0",
+        "relation": "supports attribution rule in"
+      }
+    ],
+    "details": {
+      "3-month": "AI 2.7; COVID 4.3; baseline 2.8",
+      "6-month": "AI 4.8; COVID 5.9; baseline 4.7",
+      "12-month": "AI 6.1; COVID 6.7; baseline 6.1",
+      "24-month": "AI 7.0; COVID 6.9; baseline 6.6",
+      "Conclusion": "Labour-change metrics alone cannot identify AI causality"
+    }
+  },
+  {
+    "id": "AA-ACT-CA-002",
+    "version": "0.2.0",
+    "type": "action",
+    "country": "CA",
+    "title": "Employment Insurance as reactive protection baseline",
+    "status": "proposed",
+    "updated": "2026-09-26",
+    "summary": "Use EI regular benefits as the reactive comparator when assessing whether earlier mechanisms add transition time.",
+    "body": "In the Canada POC, EI is not treated as anticipatory action. It is encoded as a post-layoff baseline so the project can compare how much additional transition time earlier retention or training mechanisms might create.",
+    "limitations": [
+      "Eligibility varies by worker history and region.",
+      "Benefit caps and programme rules must be versioned.",
+      "This record does not imply that EI is sufficient for an AI-related labour transition."
+    ],
+    "provenance": {
+      "origin": "Canada POC PBGM policy mapping",
+      "url": "https://www.canada.ca/en/services/benefits/ei/ei-regular-benefit/benefit-amount.html",
+      "accessed": "2026-09-25",
+      "license": "Project-authored policy mapping using Government of Canada rules.",
+      "artifact": "Recovered Canada POC notebooks",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-SRC-CA-015",
+        "version": "1.0.0",
+        "relation": "rule source"
+      },
+      {
+        "id": "AA-MOD-CA-005",
+        "version": "0.2.0",
+        "relation": "encoded by"
+      }
+    ],
+    "details": {
+      "Timing": "Reactive - after qualifying job loss",
+      "Approximate replacement in POC": "55%",
+      "Role": "Policy baseline comparator, not operational trigger"
+    }
+  },
+  {
+    "id": "AA-ACT-CA-003",
+    "version": "0.2.0",
+    "type": "action",
+    "country": "CA",
+    "title": "Work-Sharing as a candidate retention mechanism",
+    "status": "proposed",
+    "updated": "2026-09-26",
+    "summary": "Assess whether Work-Sharing could preserve employment and create transition time before layoffs in a qualifying shock.",
+    "body": "The POC treats Work-Sharing as an anticipatory-ish mechanism because reduced hours can preserve employment before layoffs. Its mathematical value is clear in transition-window scenarios, but an unresolved shock-fit gap exists for efficiency-driven staffing reductions.",
+    "limitations": [
+      "Specific AI restructurings may not satisfy regular eligibility rules.",
+      "Employer and employee eligibility both matter.",
+      "Programme access, administrative timing and realized take-up are not yet modelled."
+    ],
+    "provenance": {
+      "origin": "Canada POC PBGM policy mapping",
+      "url": "https://www.canada.ca/en/employment-social-development/services/work-sharing/eligibility.html",
+      "accessed": "2026-09-25",
+      "license": "Project-authored policy mapping using Government of Canada rules.",
+      "artifact": "Recovered Canada POC notebooks",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-SRC-CA-016",
+        "version": "1.0.0",
+        "relation": "eligibility source"
+      },
+      {
+        "id": "AA-SRC-CA-017",
+        "version": "1.0.0",
+        "relation": "implementation context"
+      },
+      {
+        "id": "AA-MOD-CA-005",
+        "version": "0.2.0",
+        "relation": "encoded by"
+      }
+    ],
+    "details": {
+      "Timing": "Pre-layoff / retention",
+      "Standard period represented": "26 weeks plus possible 12-week extension",
+      "Approximate replacement represented": "55% of reduced income",
+      "Decision status": "Candidate mechanism; shock fit unresolved"
+    }
+  },
+  {
+    "id": "AA-ACT-CA-004",
+    "version": "0.2.0",
+    "type": "action",
+    "country": "CA",
+    "title": "Worker Retention Grant as a candidate retention-and-training mechanism",
+    "status": "proposed",
+    "updated": "2026-09-26",
+    "summary": "Assess whether a Work-Sharing-linked grant could combine income protection with training to accelerate transition.",
+    "body": "The POC maps the Worker Retention Grant as a candidate mechanism that can add training to a retention pathway. It is useful analytically because TVPM can represent both added protected time and a possible reduction in transition duration.",
+    "limitations": [
+      "The mechanism depends on an approved and implemented Work-Sharing agreement.",
+      "Training effects on sustainable transition time are not empirically estimated.",
+      "The POC does not estimate take-up, coverage or effectiveness."
+    ],
+    "provenance": {
+      "origin": "Canada POC PBGM/TVPM policy mapping",
+      "url": "https://www.canada.ca/en/employment-social-development/services/funding/worker-retention-grant/overview.html",
+      "accessed": "2026-09-25",
+      "license": "Project-authored policy mapping using Government of Canada rules.",
+      "artifact": "Recovered Canada POC notebooks",
+      "sha256": null,
+      "codeCommit": null
+    },
+    "links": [
+      {
+        "id": "AA-SRC-CA-018",
+        "version": "1.0.0",
+        "relation": "programme source"
+      },
+      {
+        "id": "AA-ACT-CA-003",
+        "version": "0.2.0",
+        "relation": "depends on qualifying"
+      },
+      {
+        "id": "AA-MOD-CA-006",
+        "version": "0.2.0",
+        "relation": "timing effect evaluated by"
+      }
+    ],
+    "details": {
+      "Timing": "Pre-layoff retention plus training",
+      "Approximate replacement represented": "70% of lost income",
+      "Decision status": "Candidate mechanism; no effectiveness claim"
+    }
   }
 ]

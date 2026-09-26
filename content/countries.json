@@ -2,7 +2,7 @@
   {
     "code": "CA",
     "name": "Canada",
-    "stage": "Evidence build",
-    "description": "First pilot: source architecture is now defined for immigrant labour-market outcomes, occupation employment, detailed vacancies and Canadian AI-exposure evidence. Real-data ingestion and validation are next."
+    "stage": "Validated POC - calibration pending",
+    "description": "First pilot: the five-layer quantitative architecture has been run and validated as a proof of concept. The architecture survives, the current broad AI-displacement alarm is not triggered, and production calibration still requires fuller occupation, financial-runway, transition-time and policy-take-up data."
   }
 ]
