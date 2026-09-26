@@ -1,5 +1,4 @@
-import recordsData from '../content/records.json' with { type: 'json' };
-import countriesData from '../content/countries.json' with { type: 'json' };
+import {recordsData, countriesData} from './content-data.js';
 
 export const records = recordsData;
 export const countries = countriesData;
