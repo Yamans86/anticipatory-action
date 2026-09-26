@@ -1,3 +1,8 @@
 [
-  {"code":"CA","name":"Canada","stage":"Scoping","description":"First pilot: test whether AI-related labour-market change can be detected early enough to inform support. No observations or validated results are published yet."}
+  {
+    "code": "CA",
+    "name": "Canada",
+    "stage": "Evidence build",
+    "description": "First pilot: source architecture is now defined for immigrant labour-market outcomes, occupation employment, detailed vacancies and Canadian AI-exposure evidence. Real-data ingestion and validation are next."
+  }
 ]
