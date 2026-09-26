@@ -46,6 +46,11 @@ const pattern = new RegExp(
   'g'
 );
 
+export function termsInText(value) {
+  const text=String(value ?? '');
+  return glossaryTerms.filter(item=>new RegExp('\\b'+escapeRegex(item.abbr)+'\\b').test(text));
+}
+
 export function annotateAcronyms(html) {
   return String(html).split(/(<[^>]+>)/g).map(part=>{
     if (part.startsWith('<')) return part;
