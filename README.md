@@ -2,7 +2,7 @@
 
 An evidence-first public research platform investigating whether AI-related labour-market change can inform earlier, accountable support. Canada is the first pilot.
 
-**Research scaffold:** no ingested observations, completed experiments, validated forecasts or operational triggers. Seven initial records distinguish a catalogued publisher source from proposed research work.
+**Research scaffold:** no ingested observations, completed research experiments, validated forecasts or operational triggers. Seven initial records distinguish a catalogued publisher source from proposed research work. The software scaffold itself is tested for catalog integrity, routing, filtering, escaping, version links, JSON output, health checks and security headers.
 
 ## Run and verify
 
@@ -35,9 +35,9 @@ Make changes on a branch. Never edit or remove a published record version: appen
 
 Source metadata is not a copied dataset. Before ingesting data, verify licence and coverage, pin the release vintage, store original artifact checksums and capture transformation code/environment provenance. Never publish personal or restricted data to this repository.
 
-## Deploy on Railway
+## Deployment
 
-The Dockerfile and `railway.json` are ready for a GitHub-backed service on `main`. No database, volume or environment secrets are required. See [deployment notes](docs/deployment.md).
+Production target: Vercel, deployed from the `main` branch of this repository. The public site is `https://anticipatory-action.vercel.app/`. The Dockerfile and Railway configuration remain in the repository as portable fallback deployment options. No database or environment secrets are required for the current read-only release. See [deployment notes](docs/deployment.md).
 
 ## Content status and reuse
 
