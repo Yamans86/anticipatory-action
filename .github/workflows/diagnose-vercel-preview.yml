@@ -1,0 +1,21 @@
+name: Diagnose Vercel preview
+
+on:
+  push:
+    branches: [diagnose-vercel-preview]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test exact Vercel preview
+        shell: bash
+        run: |
+          set -euxo pipefail
+          BASE="https://anticipatory-action-git-fix-ver-a93cb7-yamans-projects-5bbfc82c.vercel.app"
+          curl -i --fail-with-body --max-time 20 "$BASE/"
+          curl -i --fail-with-body --max-time 20 "$BASE/health"
+          curl -i --fail-with-body --max-time 20 "$BASE/countries/CA"
