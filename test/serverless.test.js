@@ -16,7 +16,7 @@ test('static production build renders core routes and data', () => {
 
   assert.match(home, /<h1>Understand change/);
   assert.match(canada, /Canada Lab/);
-  assert.match(canada, /Current POC verdict/);
+  assert.match(canada, /Current proof-of-concept verdict/);
   assert.match(canadaPoc, /SHARE WITH CAVEATS/);
   assert.match(canadaPoc, /NOT TRIGGERED/);
   assert.match(canadaPoc, /Occupational Transition Pressure Model/);
