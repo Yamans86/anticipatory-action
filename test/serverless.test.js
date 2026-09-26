@@ -15,8 +15,8 @@ test('static production build renders core routes and data', () => {
   assert.match(home, /<h1>Understand change/);
   assert.match(canada, /Canada Lab/);
   assert.equal(health.status, 'ok');
-  assert.equal(health.version, '0.3.4');
-  assert.equal(catalog.release, '0.3.4');
+  assert.equal(health.version, '0.3.5');
+  assert.equal(catalog.release, '0.3.5');
   assert.ok(catalog.records.length >= 20);
   assert.match(css, /--teal/);
 });
