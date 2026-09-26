@@ -1,5 +1,6 @@
 export const glossaryTerms = [
   {abbr:'AI', full:'Artificial intelligence', meaning:'Computer systems used to perform tasks that normally require human judgement, pattern recognition, language or prediction.'},
+  {abbr:'GenAI', full:'Generative artificial intelligence', meaning:'Artificial-intelligence systems that generate new content such as text, images, code or audio in response to prompts.'},
   {abbr:'POC', full:'Proof of concept', meaning:'An early test showing whether an idea or method can work. It is not a production-ready system.'},
   {abbr:'MVP', full:'Minimum viable product', meaning:'The earliest usable version of a product built to test whether it is useful before adding more features.'},
   {abbr:'OTPM', full:'Occupational Transition Pressure Model', meaning:'Tests whether AI exposure and observed use are accompanied by unusual labour-market deterioration.'},
@@ -33,7 +34,8 @@ export const glossaryTerms = [
   {abbr:'GCC', full:'Gulf Cooperation Council', meaning:'The regional organization comprising Bahrain, Kuwait, Oman, Qatar, Saudi Arabia and the United Arab Emirates.'},
   {abbr:'API', full:'Application Programming Interface', meaning:'A structured way for software to request or exchange data.'},
   {abbr:'JSON', full:'JavaScript Object Notation', meaning:'A structured text format used to exchange and download data.'},
-  {abbr:'COVID-19', full:'Coronavirus disease 2019', meaning:'The infectious disease and associated pandemic used here as a historical labour-market shock and negative-control period.'}
+  {abbr:'COVID-19', full:'Coronavirus disease 2019', meaning:'The infectious disease and associated pandemic used here as a historical labour-market shock and negative-control period.'},
+  {abbr:'COVID', full:'Coronavirus disease 2019', meaning:'A shorter label used in some archived research records for the COVID-19 pandemic period.'}
 ];
 
 export const glossaryMap = Object.fromEntries(glossaryTerms.map(x=>[x.abbr,x]));
