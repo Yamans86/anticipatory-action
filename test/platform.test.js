@@ -24,7 +24,7 @@ test('core renderers produce HTML without a runtime server',()=>{
   assert.match(homeHtml, /Canada is the first pilot/);
   const canadaHtml = layout('Canada Lab',countryPage({code:'CA',name:'Canada',stage:'Validated POC - calibration pending',description:'test'}),'/countries/CA');
   assert.match(canadaHtml,/Canada Lab/);
-  assert.match(canadaHtml,/Computational POC and validation/);
+  assert.match(canadaHtml,/Computational proof of concept and validation/);
   assert.match(canadaHtml,/NOT triggered|not triggered/i);
   assert.match(layout(records[0].title,detail(records[0]),recordPath(records[0])),/Evidence and dependencies/);
   assert.match(catalog(new URL('https://static.local/catalog?type=indicator&country=CA&q=unemployment'),undefined,'Research catalog','test'),/2 records</);
