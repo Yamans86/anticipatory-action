@@ -20,7 +20,7 @@ test('filters combine country, type and text',()=>{
 test('core renderers produce HTML without a runtime server',()=>{
   assert.match(layout('Home',home(),'/'),/<h1>Understand change/);
   assert.match(layout('Canada Lab',countryPage({code:'CA',name:'Canada',stage:'Evidence build',description:'test'}),'/countries/CA'),/Canada Lab/);
-  assert.match(layout(records[0].title,detail(records[0]),recordPath(records[0])),/Evidence lineage/);
+  assert.match(layout(records[0].title,detail(records[0]),recordPath(records[0])),/Evidence and dependencies/);
   assert.match(catalog(new URL('https://static.local/catalog?type=indicator&country=CA&q=unemployment'),undefined,'Research catalog','test'),/2 records</);
   assert.ok(staticPages['/project']);
 });
