@@ -16,7 +16,7 @@ test('static production build renders core routes and data', () => {
   const framework = readFileSync(new URL('../dist/framework.html', import.meta.url), 'utf8');
   const actions = readFileSync(new URL('../dist/actions.html', import.meta.url), 'utf8');
 
-  assert.match(home, /<h1>Understand change/);
+  assert.match(home, /<h1>Anticipatory action for technological disruption/);
   assert.match(canada, /Canada Lab/);
   assert.match(canada, /Current proof-of-concept verdict/);
   assert.match(canadaPoc, /SHARE WITH CAVEATS/);
@@ -46,7 +46,7 @@ test('src-root production build renders the same static site', () => {
   execFileSync(process.execPath, ['scripts/build-static.js', 'src/dist'], { stdio: 'pipe' });
   const home = readFileSync(new URL('../src/dist/index.html', import.meta.url), 'utf8');
   const health = JSON.parse(readFileSync(new URL('../src/dist/health.json', import.meta.url), 'utf8'));
-  assert.match(home, /<h1>Understand change/);
+  assert.match(home, /<h1>Anticipatory action for technological disruption/);
   assert.equal(health.version, '0.5.0');
 });
 
