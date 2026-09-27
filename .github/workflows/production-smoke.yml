@@ -25,6 +25,8 @@ jobs:
             evidence="$(curl -fsS --max-time 15 "$BASE/evidence" 2>/dev/null || true)"
             poc="$(curl -fsS --max-time 15 "$BASE/canada-poc" 2>/dev/null || true)"
             glossary="$(curl -fsS --max-time 15 "$BASE/glossary" 2>/dev/null || true)"
+            framework="$(curl -fsS --max-time 15 "$BASE/framework" 2>/dev/null || true)"
+            actions="$(curl -fsS --max-time 15 "$BASE/actions" 2>/dev/null || true)"
             if grep -q "Understand change" <<<"$home" \
               && grep -q '"status"[[:space:]]*:[[:space:]]*"ok"' <<<"$health" \
               && grep -q "Canada Lab" <<<"$canada" \
@@ -34,7 +36,12 @@ jobs:
               && grep -q "Occupational Transition Pressure Model" <<<"$poc" \
               && grep -q "Population Exposure Model" <<<"$poc" \
               && grep -q "Transition Velocity and Protected Transition Margin Model" <<<"$poc" \
-              && grep -q "Minimum viable product" <<<"$glossary"; then
+              && grep -q "Minimum viable product" <<<"$glossary" \
+              && grep -q "Humanitarian anticipatory action" <<<"$framework" \
+              && grep -q "Priority for anticipatory action" <<<"$framework" \
+              && grep -q "Compare the cost of acting early" <<<"$framework" \
+              && grep -q "Candidate activity catalogue" <<<"$actions" \
+              && grep -q "universal basic income" <<<"$actions"; then
               echo "Production smoke test passed on attempt $attempt"
               ok=1
               break
@@ -57,5 +64,9 @@ jobs:
             curl -i --max-time 20 "$BASE/canada-poc" || true
             echo "--- GLOSSARY HEADERS/BODY ---"
             curl -i --max-time 20 "$BASE/glossary" || true
+            echo "--- FRAMEWORK HEADERS/BODY ---"
+            curl -i --max-time 20 "$BASE/framework" || true
+            echo "--- ACTIONS HEADERS/BODY ---"
+            curl -i --max-time 20 "$BASE/actions" || true
             exit 1
           fi
