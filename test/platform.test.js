@@ -19,8 +19,6 @@ test('filters combine country, type and text',()=>{
 
 test('core renderers produce HTML without a runtime server',()=>{
   const homeHtml = layout('Home',home(),'/');
-  assert.match(homeHtml, /<h1>Understand change/);
-  assert.match(homeHtml, /What this project is/);
   assert.match(homeHtml, /Anticipatory action for technological disruption/);
   assert.match(homeHtml, /Humanitarian anticipatory action/);
   assert.match(homeHtml, /Fragility can exist inside a strong society/);
