@@ -21,7 +21,9 @@ test('core renderers produce HTML without a runtime server',()=>{
   const homeHtml = layout('Home',home(),'/');
   assert.match(homeHtml, /<h1>Understand change/);
   assert.match(homeHtml, /What this project is/);
-  assert.match(homeHtml, /Canada is the first pilot/);
+  assert.match(homeHtml, /Anticipatory action for technological disruption/);
+  assert.match(homeHtml, /Humanitarian anticipatory action/);
+  assert.match(homeHtml, /Fragility can exist inside a strong society/);
   const canadaHtml = layout('Canada Lab',countryPage({code:'CA',name:'Canada',stage:'Validated POC - calibration pending',description:'test'}),'/countries/CA');
   assert.match(canadaHtml,/Canada Lab/);
   assert.match(canadaHtml,/Computational proof of concept and validation/);
@@ -29,6 +31,11 @@ test('core renderers produce HTML without a runtime server',()=>{
   assert.match(layout(records[0].title,detail(records[0]),recordPath(records[0])),/Evidence and dependencies/);
   assert.match(catalog(new URL('https://static.local/catalog?type=indicator&country=CA&q=unemployment'),undefined,'Research catalog','test'),/2 records</);
   assert.ok(staticPages['/project']);
+  assert.ok(staticPages['/framework']);
+  assert.match(staticPages['/framework'][1](),/From technological disruption to anticipatory action/);
+  assert.match(staticPages['/framework'][1](),/Priority for anticipatory action/);
+  assert.match(staticPages['/actions'][1](),/Candidate activity catalogue/);
+  assert.match(staticPages['/actions'][1](),/universal basic income/i);
   assert.ok(staticPages['/canada-poc']);
   assert.ok(staticPages['/glossary']);
   assert.match(staticPages['/canada-poc'][1](),/Occupational Transition Pressure Model/);
