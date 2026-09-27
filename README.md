@@ -1,6 +1,6 @@
 # Anticipatory Action
 
-An evidence-first public research platform investigating whether artificial-intelligence (AI) related labour-market change can inform earlier, accountable support. Canada is the first pilot.
+An evidence-first public research platform adapting humanitarian anticipatory-action logic to artificial-intelligence (AI) related labour-market disruption in advanced economies. The project asks whether emerging socioeconomic fragility can be detected early enough to protect household resilience before labour disruption becomes crisis. Canada is the first empirical pilot.
 
 **Canada proof-of-concept status:** the five-layer architecture has been executed and validated as a proof of concept using Canadian public evidence, negative controls, coverage tests, policy rules and transition-time sensitivity analysis. The architecture survives, the current broad structural AI-displacement alarm is **not triggered**, and calibration is not yet production-ready.
 
@@ -82,6 +82,6 @@ The earlier Vercel deployment remains outside the critical production path.
 
 ## Content status and reuse
 
-v0.4 includes 51 versioned research records, including restored Canada proof of concept results and source-backed validation objects. The POC is not equivalent to a production-grade data pipeline: several inputs were derived from published summaries or chart transcriptions, and the raw-source ingestion/calibration layer remains the next engineering step.
+v0.5 includes 51 versioned research records and a redesigned conceptual framework, including restored Canada proof of concept results and source-backed validation objects. The POC is not equivalent to a production-grade data pipeline: several inputs were derived from published summaries or chart transcriptions, and the raw-source ingestion/calibration layer remains the next engineering step.
 
 Project ownership, software/content licensing and editorial roles should be explicitly assigned before broader reuse or operational adoption. No software or content licence is currently granted by this repository.
