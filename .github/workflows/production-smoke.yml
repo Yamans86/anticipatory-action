@@ -27,7 +27,7 @@ jobs:
             glossary="$(curl -fsS --max-time 15 "$BASE/glossary" 2>/dev/null || true)"
             framework="$(curl -fsS --max-time 15 "$BASE/framework" 2>/dev/null || true)"
             actions="$(curl -fsS --max-time 15 "$BASE/actions" 2>/dev/null || true)"
-            if grep -q "Understand change" <<<"$home" \
+            if grep -q "Anticipatory action for technological disruption" <<<"$home" \
               && grep -q '"status"[[:space:]]*:[[:space:]]*"ok"' <<<"$health" \
               && grep -q "Canada Lab" <<<"$canada" \
               && grep -q "Evidence and data" <<<"$evidence" \
