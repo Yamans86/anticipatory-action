@@ -18,7 +18,7 @@ test('static production build renders core routes and data', () => {
 
   assert.match(home, /<h1>Anticipatory action for technological disruption/);
   assert.match(canada, /Canada Lab/);
-  assert.match(canada, /Current proof-of-concept verdict/);
+  assert.match(canada, /Current Canada evidence/);
   assert.match(canadaPoc, /SHARE WITH CAVEATS/);
   assert.match(canadaPoc, /NOT TRIGGERED/);
   assert.match(canadaPoc, /Occupational Transition Pressure Model/);
@@ -34,8 +34,8 @@ test('static production build renders core routes and data', () => {
   assert.match(actions, /Likely phase-out/);
   assert.match(actions, /universal basic income/i);
   assert.equal(health.status, 'ok');
-  assert.equal(health.version, '0.5.0');
-  assert.equal(catalog.release, '0.5.0');
+  assert.equal(health.version, '0.7.0');
+  assert.equal(catalog.release, '3.24.0');
   assert.ok(catalog.records.length >= 51);
   assert.match(css, /--teal/);
   assert.match(css, /abbr\.term/);
@@ -47,7 +47,7 @@ test('src-root production build renders the same static site', () => {
   const home = readFileSync(new URL('../src/dist/index.html', import.meta.url), 'utf8');
   const health = JSON.parse(readFileSync(new URL('../src/dist/health.json', import.meta.url), 'utf8'));
   assert.match(home, /<h1>Anticipatory action for technological disruption/);
-  assert.equal(health.version, '0.5.0');
+  assert.equal(health.version, '0.7.0');
 });
 
 
@@ -55,8 +55,8 @@ test('legacy src/server.js command only generates static outputs', () => {
   execFileSync(process.execPath, ['src/server.js'], { stdio: 'pipe' });
   const rootHealth = JSON.parse(readFileSync(new URL('../dist/health.json', import.meta.url), 'utf8'));
   const srcHealth = JSON.parse(readFileSync(new URL('../src/dist/health.json', import.meta.url), 'utf8'));
-  assert.equal(rootHealth.version, '0.5.0');
-  assert.equal(srcHealth.version, '0.5.0');
+  assert.equal(rootHealth.version, '0.7.0');
+  assert.equal(srcHealth.version, '0.7.0');
 });
 
 

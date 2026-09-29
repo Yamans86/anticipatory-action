@@ -2,7 +2,7 @@
 
 An evidence-first public research platform adapting humanitarian anticipatory-action logic to artificial-intelligence (AI) related labour-market disruption in advanced economies. The project asks whether emerging socioeconomic fragility can be detected early enough to protect household resilience before labour disruption becomes crisis. Canada is the first empirical pilot.
 
-**Canada proof-of-concept status:** the five-layer architecture has been executed and validated as a proof of concept using Canadian public evidence, negative controls, coverage tests, policy rules and transition-time sensitivity analysis. The architecture survives, the current broad structural AI-displacement alarm is **not triggered**, and calibration is not yet production-ready.
+**Current status:** research and scenario prototype. Engine 0.6.1 remains conditional; six predictive and causal claim blocks remain. Website 0.7.0 serves research release 3.24.0 at `/release`. Earlier readiness statements below are historical development notes, superseded by the current release.
 
 The public site deliberately keeps successful, failed, downgraded and unresolved findings visible. v0.4 restores the earlier Canada computational POC alongside the newer versioned source architecture and rolling-origin forecasting protocol.
 
